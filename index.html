@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ FIFA Fan Hub 2026</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;--navy2:#0f1f38;--gold:#C8A84B;--gp:rgba(200,168,75,0.12);
+  --surf:#111e2f;--card:#162338;--b:rgba(255,255,255,0.08);--bs:rgba(255,255,255,0.15);
+  --text:#e8edf5;--muted:#7a8fa8;--acc:#3b8bd4;--abg:rgba(59,139,212,0.12);
+  --ok:#22c55e;--okbg:rgba(34,197,94,0.1);--red:#ef4444;--rdbg:rgba(239,68,68,0.1);
+  --warn:#f59e0b;--wbg:rgba(245,158,11,0.1);--r:10px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--navy);color:var(--text);min-height:100vh}
+
+/* ONBOARDING */
+#onboard{position:fixed;inset:0;background:var(--navy);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.ob-card{background:var(--card);border:1px solid var(--bs);border-radius:16px;padding:28px;max-width:380px;width:100%;text-align:center}
+.ob-logo{font-size:44px;margin-bottom:8px}
+.ob-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.ob-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.ob-inp{width:100%;padding:12px 14px;font-size:15px;background:var(--surf);border:1px solid var(--bs);border-radius:var(--r);color:#fff;margin-bottom:10px;text-align:center}
+.ob-inp:focus{outline:none;border-color:var(--gold)}
+.ob-btn{width:100%;padding:13px;font-size:15px;font-weight:700;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r);cursor:pointer;margin-bottom:10px}
+.ob-hint{font-size:11px;color:var(--muted);line-height:1.6}
+.av-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+.av-opt{font-size:22px;width:44px;height:44px;border-radius:50%;border:2px solid var(--b);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.av-opt.sel{border-color:var(--gold);background:var(--gp)}
+
+/* HEADER */
+.hdr{background:var(--navy2);border-bottom:1px solid var(--b);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:16px;font-weight:700}.logo span{color:var(--gold)}
+.user-pill{display:flex;align-items:center;gap:6px;background:var(--surf);border:1px solid var(--b);border-radius:20px;padding:4px 10px;font-size:12px;cursor:pointer}
+.live-pill{display:flex;align-items:center;gap:5px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.ldot{width:6px;height:6px;border-radius:50%;background:#f87171;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* FIREBASE BANNER */
+.fb-banner{background:var(--wbg);border:1px solid rgba(245,158,11,0.3);border-radius:var(--r);padding:12px 16px;margin:10px 16px;font-size:12px;color:var(--warn)}
+.fb-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.fb-inp{flex:1;min-width:180px;padding:7px 10px;font-size:12px;background:var(--navy);border:1px solid rgba(245,158,11,0.4);border-radius:8px;color:var(--text)}
+.fb-save{padding:7px 14px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+
+/* LAYOUT */
+.wrap{max-width:1000px;margin:0 auto;padding:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+
+/* TABS */
+.tabs{display:flex;gap:2px;background:var(--surf);border-radius:var(--r);padding:4px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 13px;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:var(--muted);transition:all .15s}
+.tab.active{background:var(--card);color:var(--gold)}
+.notif{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;margin-left:4px;vertical-align:middle}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:16px}
+.clabel{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.ctitle{font-size:15px;font-weight:600;margin-bottom:12px}
+
+/* MATCH ITEMS */
+.mitem{background:var(--surf);border:1px solid var(--b);border-radius:var(--r);padding:12px 14px;cursor:pointer;margin-bottom:7px;transition:border-color .15s}
+.mitem:hover{border-color:var(--bs)}.mitem.sel{border-color:var(--gold);background:var(--gp)}
+.mitem-row{display:flex;align-items:center;justify-content:space-between}
+.mteams{font-size:14px;font-weight:500}
+.mscore{font-size:14px;font-weight:700;color:#fff}
+.mdate{font-size:11px;color:var(--muted);margin-top:3px}
+.badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--b);color:var(--muted)}
+.blive{background:rgba(239,68,68,0.15);color:#f87171}.bfin{background:var(--okbg);color:var(--ok)}.bsched{background:var(--wbg);color:var(--warn)}
+
+/* SCORE CARD */
+.scard{background:var(--navy2);border:1px solid var(--bs);border-radius:var(--r);padding:20px;text-align:center}
+.srow{display:flex;align-items:center;justify-content:center;gap:16px}
+.tblock{text-align:center;min-width:80px}
+.tflag{font-size:34px;display:block;margin-bottom:4px}
+.tname{font-size:12px;color:var(--muted)}
+.snum{font-size:46px;font-weight:700;color:#fff;letter-spacing:-2px}
+.ssep{font-size:22px;color:var(--bs)}
+.smeta{font-size:12px;color:var(--muted);margin-top:6px}
+.sdate{font-size:12px;color:var(--gold);margin-top:4px;font-weight:600}
+
+/* COMMENTARY */
+.cbox{background:var(--abg);border:1px solid rgba(59,139,212,0.2);border-radius:var(--r);padding:14px;font-size:14px;line-height:1.7;min-height:80px}
+.langs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.lchip{font-size:12px;padding:5px 11px;border-radius:20px;border:1px solid var(--bs);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.lchip.active{background:var(--gp);color:var(--gold);border-color:var(--gold)}
+
+/* PREDICTIONS */
+.popt{border:1px solid var(--b);border-radius:var(--r);padding:14px;cursor:pointer;text-align:center;transition:all .15s}
+.popt:hover{border-color:var(--bs)}.popt.sel{border-color:var(--gold);background:var(--gp)}
+.pbar{height:4px;background:var(--b);border-radius:2px;margin-top:8px;overflow:hidden}
+.pfill{height:100%;background:var(--gold);border-radius:2px;transition:width .5s}
+.score-inp{width:52px;height:52px;text-align:center;font-size:22px;font-weight:700;background:var(--surf);border:1px solid var(--bs);border-radius:var(--r);color:#fff}
+.score-inp:focus{outline:none;border-color:var(--gold)}
+
+/* COMMENTS */
+.comment-card{background:var(--surf);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:8px}
+.comment-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cname{font-size:13px;font-weight:600;color:#fff}
+.ctime{font-size:11px;color:var(--muted)}
+.ctext{font-size:13px;line-height:1.6;color:var(--text);word-break:break-word;margin-bottom:8px}
+.react-row{display:flex;gap:5px;flex-wrap:wrap}
+.react-btn{font-size:12px;padding:3px 8px;border-radius:20px;border:1px solid var(--b);background:transparent;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:3px;transition:all .15s}
+.react-btn:hover{border-color:var(--bs)}.react-btn.reacted{background:var(--gp);border-color:var(--gold);color:var(--gold)}
+.rcount{font-size:11px;font-weight:600}
+
+/* COMMENT COMPOSER */
+.composer{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.comp-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+textarea.c-inp{width:100%;padding:10px 12px;font-size:13px;background:var(--surf);border:1px solid var(--bs);border-radius:var(--r);color:var(--text);resize:vertical;font-family:inherit;line-height:1.6;min-height:70px}
+textarea.c-inp:focus{outline:none;border-color:var(--gold)}
+.mood-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.mchip{font-size:12px;padding:4px 9px;border-radius:20px;border:1px solid var(--b);background:transparent;color:var(--muted);cursor:pointer}
+.mchip.active{background:var(--rdbg);color:var(--red);border-color:rgba(239,68,68,0.4)}
+
+/* RANT FEED */
+.rant-card{background:var(--surf);border:1px solid var(--b);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.rant-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rname{font-size:13px;font-weight:600;color:#fff}
+.rtime{font-size:11px;color:var(--muted)}
+.mtag{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--gp);color:var(--gold);margin-left:auto;white-space:nowrap}
+.rtext{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:10px;word-break:break-word}
+
+/* CHAT */
+.grp-card{background:var(--surf);border:1px solid var(--b);border-radius:var(--r);padding:12px;cursor:pointer;margin-bottom:8px;transition:border-color .15s}
+.grp-card:hover{border-color:var(--bs)}.grp-card.active{border-color:var(--gold);background:var(--gp)}
+.grp-name{font-size:14px;font-weight:600;color:#fff}
+.grp-code{font-size:10px;font-family:monospace;background:var(--b);padding:2px 6px;border-radius:4px;color:var(--gold);margin-left:6px}
+.chat-win{display:flex;flex-direction:column;height:480px;background:var(--surf);border:1px solid var(--b);border-radius:var(--r);overflow:hidden}
+.chat-hdr{padding:12px 14px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin}
+.msg{max-width:78%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.5;word-break:break-word}
+.msg.mine{align-self:flex-end;background:var(--gold);color:var(--navy);border-bottom-right-radius:4px}
+.msg.theirs{align-self:flex-start;background:var(--card);color:var(--text);border-bottom-left-radius:4px}
+.msg-time{font-size:10px;margin-top:2px;opacity:.6;text-align:right}
+.chat-inp-row{display:flex;gap:8px;padding:10px;border-top:1px solid var(--b);flex-shrink:0}
+.chat-inp{flex:1;padding:9px 12px;font-size:13px;background:var(--card);border:1px solid var(--bs);border-radius:20px;color:var(--text);font-family:inherit}
+.chat-inp:focus{outline:none;border-color:var(--gold)}
+.chat-send{padding:9px 18px;background:var(--gold);color:var(--navy);border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer}
+
+/* FORM */
+.inp-field{width:100%;padding:10px 12px;font-size:13px;background:var(--surf);border:1px solid var(--bs);border-radius:var(--r);color:var(--text);margin-bottom:10px;font-family:inherit}
+.inp-field:focus{outline:none;border-color:var(--gold)}
+
+/* BUTTONS */
+.btn-gold{width:100%;padding:11px;font-size:14px;font-weight:700;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r);cursor:pointer}
+.btn-gold:hover{opacity:.88}.btn-gold:disabled{opacity:.4;cursor:not-allowed}
+.btn-out{padding:8px 14px;font-size:13px;background:transparent;border:1px solid var(--bs);border-radius:var(--r);color:var(--text);cursor:pointer}
+.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+.btn-sm{padding:5px 10px;font-size:11px;background:transparent;border:1px solid var(--bs);border-radius:8px;color:var(--muted);cursor:pointer}
+.btn-sm:hover{border-color:var(--gold);color:var(--gold)}
+
+/* TZ */
+.tz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.tz-cell{background:var(--surf);border-radius:8px;padding:10px;text-align:center}
+.tz-cell.me{border:1px solid var(--gold);background:var(--gp)}
+.tz-city{font-size:11px;color:var(--muted);margin-bottom:3px}
+.tz-time{font-size:16px;font-weight:700;color:#fff}
+.tz-cell.me .tz-time{color:var(--gold)}
+
+/* LB */
+.lbrow{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--b)}
+.lbrow:last-child{border:none}
+.lbrank{width:28px;font-size:13px;font-weight:600;color:var(--muted)}
+.lbname{flex:1;font-size:14px}
+.lbpts{font-size:14px;font-weight:700;color:var(--gold)}
+.lbyou{background:var(--gp);margin:0 -16px;padding:10px 16px}
+
+/* MISC */
+.frow{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.fchip{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--b);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.fchip.active{background:var(--abg);color:var(--acc);border-color:rgba(59,139,212,0.4)}
+select{width:100%;padding:9px 12px;font-size:13px;background:var(--surf);border:1px solid var(--bs);border-radius:var(--r);color:var(--text)}
+select:focus{outline:none;border-color:var(--gold)}
+.panel{display:none}.panel.active{display:block}
+.mt{color:var(--muted);font-size:13px;font-style:italic}
+.empty{text-align:center;padding:32px;color:var(--muted);font-size:13px}
+.section-gap{margin-bottom:14px}
+.upnext{background:rgba(200,168,75,0.08);border:1px solid rgba(200,168,75,0.2);border-radius:var(--r);padding:10px 14px;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div id="onboard">
+  <div class="ob-card">
+    <div class="ob-logo">⚽</div>
+    <div class="ob-title">FIFA Fan Hub 2026</div>
+    <div class="ob-sub">India ka football adda 🇮🇳<br>Pick your avatar · Choose a fan name · No password!</div>
+    <div class="av-pick">
+      <div class="av-opt sel" data-av="🦁" onclick="pickAv(this)">🦁</div>
+      <div class="av-opt" data-av="🐯" onclick="pickAv(this)">🐯</div>
+      <div class="av-opt" data-av="🦊" onclick="pickAv(this)">🦊</div>
+      <div class="av-opt" data-av="🐺" onclick="pickAv(this)">🐺</div>
+      <div class="av-opt" data-av="🦅" onclick="pickAv(this)">🦅</div>
+      <div class="av-opt" data-av="🐉" onclick="pickAv(this)">🐉</div>
+      <div class="av-opt" data-av="🦄" onclick="pickAv(this)">🦄</div>
+      <div class="av-opt" data-av="🔥" onclick="pickAv(this)">🔥</div>
+      <div class="av-opt" data-av="⚡" onclick="pickAv(this)">⚡</div>
+      <div class="av-opt" data-av="💪" onclick="pickAv(this)">💪</div>
+    </div>
+    <input class="ob-inp" id="ob-name" placeholder="Your fan name (e.g. HaalandFan_Hyd)" maxlength="20" onkeydown="if(event.key==='Enter')startApp()">
+    <div id="ob-err" style="color:var(--red);font-size:12px;margin-bottom:8px;display:none">Enter a name!</div>
+    <button class="ob-btn" onclick="startApp()">Enter the Hub →</button>
+    <div class="ob-hint">No email · No password · Just football 🏆<br>All times shown in YOUR timezone automatically</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo">⚽ Fan Hub <span>FIFA 2026</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span id="refresh-status" style="font-size:11px;color:var(--muted)"></span>
+    <div class="user-pill" id="user-pill" onclick="switchTabById('squad')">
+      <span id="user-av">🦁</span>
+      <span id="user-name" style="color:var(--gold);font-weight:600">Fan</span>
+    </div>
+    <div class="live-pill"><div class="ldot"></div>LIVE</div>
+  </div>
+</div>
+
+<!-- FIREBASE BANNER -->
+<div class="fb-banner" id="fb-banner">
+  <div><strong>🔥 Enable live squad chat</strong> — free Firebase (rants & comments work without it!)</div>
+  <div style="font-size:11px;margin-top:4px">Get free URL at <a href="https://console.firebase.google.com" target="_blank" style="color:var(--gold)">console.firebase.google.com</a> → New project → Realtime Database → copy URL</div>
+  <div class="fb-row">
+    <input class="fb-inp" id="fb-url-inp" placeholder="https://your-project-default-rtdb.firebaseio.com">
+    <button class="fb-save" onclick="connectFirebase()">Connect →</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabs" id="main-tabs">
+    <button class="tab active" data-tab="pulse" onclick="switchTab(this)">📊 Live</button>
+    <button class="tab" data-tab="history" onclick="switchTab(this)">📋 All Matches</button>
+    <button class="tab" data-tab="predict" onclick="switchTab(this)">🔮 Predict</button>
+    <button class="tab" data-tab="rant" onclick="switchTab(this)">🎙️ Rants</button>
+    <button class="tab" data-tab="squad" onclick="switchTab(this)">👥 Squad <span class="notif" id="chat-notif" style="display:none">!</span></button>
+    <button class="tab" data-tab="watch" onclick="switchTab(this)">🕐 Watch Times</button>
+    <button class="tab" data-tab="board" onclick="switchTab(this)">🏆 Leaderboard</button>
+  </div>
+
+  <!-- ═══ LIVE / PULSE ═══ -->
+  <div id="tab-pulse" class="panel active">
+    <div class="g2 section-gap">
+      <div>
+        <div class="clabel">🔴 Live & recent</div>
+        <div id="pulse-list"><div class="mt">Loading real-time data...</div></div>
+      </div>
+      <div id="pulse-right">
+        <div class="scard empty">Select a match to see live stats</div>
+      </div>
+    </div>
+    <div id="pulse-extras" style="display:none">
+      <div class="g2 section-gap">
+        <div class="card"><div class="clabel">Match stats</div><div id="pulse-stats"></div></div>
+        <div class="card"><div class="clabel">Key events</div><div id="pulse-events"></div></div>
+      </div>
+      <!-- AI Commentary optional -->
+      <div class="card section-gap">
+        <div style="font-size:11px;color:var(--acc);font-weight:600;margin-bottom:8px">✦ AI Commentary (optional — needs free Gemini key)</div>
+        <div id="commentary" class="cbox mt">Add Gemini key below for AI commentary in 12 languages</div>
+        <div class="langs">
+          <button class="lchip active" onclick="changeLang('en',this)">English</button>
+          <button class="lchip" onclick="changeLang('hi',this)">हिंदी</button>
+          <button class="lchip" onclick="changeLang('te',this)">తెలుగు</button>
+          <button class="lchip" onclick="changeLang('kn',this)">ಕನ್ನಡ</button>
+          <button class="lchip" onclick="changeLang('ml',this)">മലയാളം</button>
+          <button class="lchip" onclick="changeLang('ta',this)">தமிழ்</button>
+          <button class="lchip" onclick="changeLang('pt',this)">Português</button>
+          <button class="lchip" onclick="changeLang('fr',this)">Français</button>
+          <button class="lchip" onclick="changeLang('de',this)">Deutsch</button>
+          <button class="lchip" onclick="changeLang('es',this)">Español</button>
+          <button class="lchip" onclick="changeLang('ar',this)">العربية</button>
+          <button class="lchip" onclick="changeLang('ja',this)">日本語</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <input id="gem-inp" placeholder="Gemini API key (AIza...) — optional, free from aistudio.google.com" style="flex:1;padding:8px 10px;font-size:12px;background:var(--surf);border:1px solid var(--bs);border-radius:8px;color:var(--text)">
+          <button onclick="saveGemini()" style="padding:8px 14px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">Save</button>
+        </div>
+      </div>
+      <!-- Match comments -->
+      <div class="card">
+        <div class="ctitle">💬 Fan comments on this match</div>
+        <div class="composer">
+          <div class="comp-top">
+            <div class="av" id="comp-av">🦁</div>
+            <div style="font-size:13px;font-weight:600;color:#fff" id="comp-name">Fan</div>
+          </div>
+          <textarea class="c-inp" id="match-comment-inp" placeholder="Comment on this match... Hindi, Telugu, Tamil, anything goes! 🔥" maxlength="300"></textarea>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <div class="mood-row">
+              <button class="mchip active" onclick="setCommentMood('😡',this)">😡</button>
+              <button class="mchip" onclick="setCommentMood('🥳',this)">🥳</button>
+              <button class="mchip" onclick="setCommentMood('😭',this)">😭</button>
+              <button class="mchip" onclick="setCommentMood('🤣',this)">🤣</button>
+              <button class="mchip" onclick="setCommentMood('🔥',this)">🔥</button>
+              <button class="mchip" onclick="setCommentMood('😤',this)">😤</button>
+            </div>
+            <button class="btn-out" onclick="postMatchComment()" style="padding:7px 14px;font-size:12px">Post 💬</button>
+          </div>
+        </div>
+        <div id="match-comments"><div class="mt">Select a match to see comments</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ALL MATCHES ═══ -->
+  <div id="tab-history" class="panel">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;padding:8px 12px;background:var(--surf);border-radius:8px">
+      All times shown in <strong style="color:var(--gold)" id="tz-label">your timezone</strong>
+    </div>
+    <div class="frow">
+      <button class="fchip active" onclick="filterH('all',this)">All 104 matches</button>
+      <button class="fchip" onclick="filterH('live',this)">🔴 Live</button>
+      <button class="fchip" onclick="filterH('finished',this)">✅ Results</button>
+      <button class="fchip" onclick="filterH('scheduled',this)">🗓 Upcoming</button>
+      <button class="fchip" onclick="filterH('Final',this)">🏆 Final</button>
+      <button class="fchip" onclick="filterH('Semi',this)">SF</button>
+      <button class="fchip" onclick="filterH('Quarter',this)">QF</button>
+      <button class="fchip" onclick="filterH('Round of 16',this)">R16</button>
+      <button class="fchip" onclick="filterH('Round of 32',this)">R32</button>
+      <button class="fchip" onclick="filterH('Group',this)">Group Stage</button>
+    </div>
+    <div id="history-list"></div>
+  </div>
+
+  <!-- ═══ PREDICTIONS ═══ -->
+  <div id="tab-predict" class="panel">
+    <div class="g2">
+      <div>
+        <div class="clabel">Pick a match to predict</div>
+        <div id="pred-list"></div>
+      </div>
+      <div id="pred-form"><div class="card empty">Select an upcoming match</div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="ctitle">Community predictions</div>
+      <div id="pred-community"><div class="mt">Select a match to see votes</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ RANTS (global feed) ═══ -->
+  <div id="tab-rant" class="panel">
+    <div class="composer">
+      <div class="comp-top">
+        <div class="av" id="rant-av">🦁</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#fff" id="rant-uname">Fan</div>
+          <div style="font-size:11px;color:var(--muted)">Global fan feed — all languages welcome 🌍</div>
+        </div>
+      </div>
+      <select id="rant-match-sel" style="margin-bottom:8px"></select>
+      <textarea class="c-inp" id="rant-text" placeholder="Yaar kya match tha! Apna dil kholo — Hindi, Telugu, Kannada, Tamil, English — sab chalega! ⚽🔥😭" maxlength="500" oninput="updateCC()"></textarea>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Mood</div>
+          <div class="mood-row">
+            <button class="mchip active" onclick="setRantMood('😡 Furious',this)">😡</button>
+            <button class="mchip" onclick="setRantMood('🥳 Ecstatic',this)">🥳</button>
+            <button class="mchip" onclick="setRantMood('😤 Disbelief',this)">😤</button>
+            <button class="mchip" onclick="setRantMood('😭 Heartbroken',this)">😭</button>
+            <button class="mchip" onclick="setRantMood('🦁 Proud',this)">🦁</button>
+            <button class="mchip" onclick="setRantMood('🤣 LOL',this)">🤣</button>
+            <button class="mchip" onclick="setRantMood('🤬 Robbed',this)">🤬</button>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:4px"><span id="cc">0</span>/500</div>
+          <button class="btn-gold" style="width:auto;padding:9px 20px" onclick="postRant()">Post rant 🔥</button>
+        </div>
+      </div>
+    </div>
+    <div class="frow">
+      <button class="fchip active" onclick="setRantFilter('all',this)">All rants</button>
+      <button class="fchip" onclick="setRantFilter('mine',this)">My rants</button>
+      <button class="fchip" onclick="setRantFilter('top',this)">🔥 Top reacted</button>
+    </div>
+    <div id="rant-feed"><div class="empty">No rants yet — be the first! 🔥</div></div>
+  </div>
+
+  <!-- ═══ SQUAD ═══ -->
+  <div id="tab-squad" class="panel">
+    <div class="g2">
+      <div>
+        <div class="card section-gap">
+          <div class="ctitle">Create a squad</div>
+          <input class="inp-field" id="grp-name" placeholder="Squad name (e.g. Hyderabad Football Gang 🦁)">
+          <button class="btn-gold" onclick="createGroup()">Create →</button>
+        </div>
+        <div class="card section-gap">
+          <div class="ctitle">Join a squad</div>
+          <div style="display:flex;gap:8px">
+            <input class="inp-field" id="join-code" placeholder="SQUAD CODE" style="margin:0;flex:1;font-family:monospace;text-transform:uppercase;letter-spacing:2px;font-size:14px;text-align:center">
+            <button class="btn-out" onclick="joinGroup()">Join</button>
+          </div>
+        </div>
+        <div class="clabel">My squads</div>
+        <div id="groups-list"><div class="mt">Create or join a squad!</div></div>
+      </div>
+      <div id="chat-area">
+        <div class="card empty" style="height:480px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+          <div style="font-size:32px">💬</div>
+          <div>Select a squad to chat</div>
+          <div style="font-size:11px;color:var(--muted)">Needs Firebase for live chat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WATCH TIMES ═══ -->
+  <div id="tab-watch" class="panel">
+    <div class="card section-gap">
+      <div class="ctitle">Live clocks — right now</div>
+      <div class="tz-grid">
+        <div class="tz-cell me"><div class="tz-city">📍 Your time</div><div class="tz-time" id="tz-you">—</div><div style="font-size:10px;color:var(--gold);margin-top:2px" id="tz-you-label">detecting...</div></div>
+        <div class="tz-cell"><div class="tz-city">🇮🇳 IST</div><div class="tz-time" id="tz0">—</div></div>
+        <div class="tz-cell"><div class="tz-city">🗽 ET (NY)</div><div class="tz-time" id="tz1">—</div></div>
+        <div class="tz-cell"><div class="tz-city">🇬🇧 BST</div><div class="tz-time" id="tz2">—</div></div>
+        <div class="tz-cell"><div class="tz-city">🇦🇪 GST</div><div class="tz-time" id="tz3">—</div></div>
+        <div class="tz-cell"><div class="tz-city">🇦🇺 AEST</div><div class="tz-time" id="tz4">—</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle">Upcoming matches — in your time</div>
+      <div id="watch-upcoming"></div>
+    </div>
+  </div>
+
+  <!-- ═══ LEADERBOARD ═══ -->
+  <div id="tab-board" class="panel">
+    <div class="card">
+      <div class="ctitle">🏆 Prediction leaderboard</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Correct result = 100 pts · Correct score = +200 pts</div>
+      <div id="lb-list"></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="ctitle">Your stats</div>
+      <div class="g3">
+        <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Points</div></div>
+        <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--ok)" id="my-res">0</div><div style="font-size:12px;color:var(--muted)">Correct results</div></div>
+        <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--acc)" id="my-sc">0</div><div style="font-size:12px;color:var(--muted)">Exact scores</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-database-compat.min.js"></script>
+
+<script>
+// ═══ STATE ════════════════════════════════════════════════════════════════════
+let ME = JSON.parse(localStorage.getItem("fh_me")||"null");
+let GKEY = localStorage.getItem("fh_gkey")||"";
+let FB_URL = localStorage.getItem("fh_fburl")||"";
+let db = null;
+let activeGrpId = null;
+let chatRef = null;
+let rantRef = null;
+let commentRef = null;
+let allRants = [];
+let allComments = {}; // keyed by matchId
+let rantFilter = "all";
+let rantMood = "😡 Furious";
+let commentMood = "😡";
+let curLang = "en";
+let selMid = null;
+let selWinner = null;
+let alerts = JSON.parse(localStorage.getItem("fh_alerts")||"{}");
+const AV_BG = {"🦁":"#C8A84B","🐯":"#ef4444","🦊":"#f59e0b","🐺":"#7a8fa8","🦅":"#3b8bd4","🐉":"#a855f7","🦄":"#ec4899","🔥":"#ef4444","⚡":"#eab308","💪":"#22c55e"};
+const REACTS = ["🔥","😂","💯","😭","👏","❤️","⚽","🤣"];
+const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
+let userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// ═══ COMPLETE FIFA 2026 MATCH DATA ═══════════════════════════════════════════
+// Real data as of July 6, 2026 — sourced from ESPN/Yahoo/Fox Sports
+// Status: finished = result confirmed | live = in progress | scheduled = upcoming
+// All kickoff times in UTC
+
+const MATCHES = [
+// ── GROUP STAGE ──────────────────────────────────────────────────────────
+// Group A
+{id:"ga1",h:"Mexico",a:"South Africa",hf:"🇲🇽",af:"🇿🇦",hs:2,as:0,stage:"Group A",venue:"Estadio Azteca, Mexico City",ko:"2026-06-11T19:00:00Z",s:"finished",ev:[{m:34,t:"goal",si:"home",p:"R. Jiménez"},{m:67,t:"goal",si:"home",p:"J. Quiñones"}]},
+{id:"ga2",h:"Korea Republic",a:"Czechia",hf:"🇰🇷",af:"🇨🇿",hs:2,as:1,stage:"Group A",venue:"AT&T Stadium, Dallas",ko:"2026-06-11T23:00:00Z",s:"finished",ev:[]},
+{id:"ga3",h:"Czechia",a:"South Africa",hf:"🇨🇿",af:"🇿🇦",hs:1,as:1,stage:"Group A",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-06-18T20:00:00Z",s:"finished",ev:[]},
+{id:"ga4",h:"Mexico",a:"South Korea",hf:"🇲🇽",af:"🇰🇷",hs:1,as:0,stage:"Group A",venue:"Estadio Azteca, Mexico City",ko:"2026-06-18T23:00:00Z",s:"finished",ev:[]},
+{id:"ga5",h:"Mexico",a:"Czechia",hf:"🇲🇽",af:"🇨🇿",hs:3,as:0,stage:"Group A",venue:"Estadio Azteca, Mexico City",ko:"2026-06-24T22:00:00Z",s:"finished",ev:[]},
+{id:"ga6",h:"South Africa",a:"South Korea",hf:"🇿🇦",af:"🇰🇷",hs:1,as:0,stage:"Group A",venue:"Arrowhead Stadium, Kansas City",ko:"2026-06-24T22:00:00Z",s:"finished",ev:[]},
+// Group B
+{id:"gb1",h:"Canada",a:"Bosnia & Herzegovina",hf:"🇨🇦",af:"🇧🇦",hs:1,as:1,stage:"Group B",venue:"BC Place, Vancouver",ko:"2026-06-12T22:00:00Z",s:"finished",ev:[]},
+{id:"gb2",h:"Switzerland",a:"Qatar",hf:"🇨🇭",af:"🇶🇦",hs:1,as:1,stage:"Group B",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-13T02:00:00Z",s:"finished",ev:[]},
+{id:"gb3",h:"Switzerland",a:"Bosnia & Herzegovina",hf:"🇨🇭",af:"🇧🇦",hs:4,as:1,stage:"Group B",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-18T22:00:00Z",s:"finished",ev:[]},
+{id:"gb4",h:"Canada",a:"Qatar",hf:"🇨🇦",af:"🇶🇦",hs:6,as:0,stage:"Group B",venue:"BC Place, Vancouver",ko:"2026-06-19T01:00:00Z",s:"finished",ev:[]},
+{id:"gb5",h:"Switzerland",a:"Canada",hf:"🇨🇭",af:"🇨🇦",hs:2,as:1,stage:"Group B",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-24T22:00:00Z",s:"finished",ev:[]},
+// Group C
+{id:"gc1",h:"USA",a:"Wales",hf:"🇺🇸",af:"🏴󠁧󠁢󠁷󠁬󠁳󠁿",hs:3,as:1,stage:"Group C",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-14T21:00:00Z",s:"finished",ev:[]},
+{id:"gc2",h:"Iran",a:"Scotland",hf:"🇮🇷",af:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",hs:0,as:3,stage:"Group C",venue:"Levi's Stadium, Santa Clara",ko:"2026-06-15T01:00:00Z",s:"finished",ev:[]},
+{id:"gc3",h:"USA",a:"Iran",hf:"🇺🇸",af:"🇮🇷",hs:1,as:0,stage:"Group C",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-21T01:00:00Z",s:"finished",ev:[]},
+{id:"gc4",h:"Scotland",a:"Wales",hf:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",af:"🏴󠁧󠁢󠁷󠁬󠁳󠁿",hs:2,as:0,stage:"Group C",venue:"Levi's Stadium, Santa Clara",ko:"2026-06-21T00:00:00Z",s:"finished",ev:[]},
+// Group D
+{id:"gd1",h:"France",a:"Senegal",hf:"🇫🇷",af:"🇸🇳",hs:3,as:1,stage:"Group D",venue:"MetLife Stadium, New York",ko:"2026-06-16T21:00:00Z",s:"finished",ev:[{m:9,t:"goal",si:"home",p:"Mbappé"},{m:27,t:"goal",si:"home",p:"Mbappé"},{m:55,t:"goal",si:"home",p:"Griezmann"},{m:72,t:"goal",si:"away",p:"Diallo"}]},
+{id:"gd2",h:"Norway",a:"Iraq",hf:"🇳🇴",af:"🇮🇶",hs:4,as:1,stage:"Group D",venue:"Gillette Stadium, Boston",ko:"2026-06-16T23:00:00Z",s:"finished",ev:[{m:12,t:"goal",si:"home",p:"Haaland"},{m:34,t:"goal",si:"home",p:"Ødegaard"},{m:61,t:"goal",si:"home",p:"Haaland"},{m:78,t:"goal",si:"home",p:"Isak"}]},
+{id:"gd3",h:"France",a:"Iraq",hf:"🇫🇷",af:"🇮🇶",hs:3,as:0,stage:"Group D",venue:"MetLife Stadium, New York",ko:"2026-06-22T21:00:00Z",s:"finished",ev:[]},
+{id:"gd4",h:"Norway",a:"Senegal",hf:"🇳🇴",af:"🇸🇳",hs:3,as:2,stage:"Group D",venue:"Gillette Stadium, Boston",ko:"2026-06-22T21:00:00Z",s:"finished",ev:[]},
+{id:"gd5",h:"France",a:"Norway",hf:"🇫🇷",af:"🇳🇴",hs:4,as:1,stage:"Group D",venue:"Lincoln Financial Field, Philadelphia",ko:"2026-06-27T01:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"home",p:"Mbappé"},{m:29,t:"goal",si:"home",p:"Griezmann"},{m:45,t:"goal",si:"home",p:"Dembélé"},{m:67,t:"goal",si:"home",p:"Mbappé"},{m:80,t:"goal",si:"away",p:"Haaland"}]},
+// Group E — Netherlands, Sweden, Japan, Tunisia
+{id:"ge1",h:"Netherlands",a:"Japan",hf:"🇳🇱",af:"🇯🇵",hs:2,as:2,stage:"Group E",venue:"Estadio BBVA, Monterrey",ko:"2026-06-14T23:00:00Z",s:"finished",ev:[]},
+{id:"ge2",h:"Sweden",a:"Tunisia",hf:"🇸🇪",af:"🇹🇳",hs:5,as:1,stage:"Group E",venue:"NRG Stadium, Houston",ko:"2026-06-14T21:00:00Z",s:"finished",ev:[]},
+{id:"ge3",h:"Netherlands",a:"Sweden",hf:"🇳🇱",af:"🇸🇪",hs:5,as:1,stage:"Group E",venue:"Estadio BBVA, Monterrey",ko:"2026-06-20T21:00:00Z",s:"finished",ev:[]},
+{id:"ge4",h:"Japan",a:"Tunisia",hf:"🇯🇵",af:"🇹🇳",hs:4,as:0,stage:"Group E",venue:"NRG Stadium, Houston",ko:"2026-06-20T21:00:00Z",s:"finished",ev:[]},
+// Group F — Spain, Uruguay, Saudi Arabia, Cape Verde
+{id:"gf1",h:"Spain",a:"Cape Verde",hf:"🇪🇸",af:"🇨🇻",hs:0,as:0,stage:"Group F",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-06-15T21:00:00Z",s:"finished",ev:[]},
+{id:"gf2",h:"Saudi Arabia",a:"Uruguay",hf:"🇸🇦",af:"🇺🇾",hs:1,as:1,stage:"Group F",venue:"Hard Rock Stadium, Miami",ko:"2026-06-15T23:00:00Z",s:"finished",ev:[]},
+{id:"gf3",h:"Spain",a:"Saudi Arabia",hf:"🇪🇸",af:"🇸🇦",hs:4,as:0,stage:"Group F",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-06-21T23:00:00Z",s:"finished",ev:[]},
+{id:"gf4",h:"Spain",a:"Uruguay",hf:"🇪🇸",af:"🇺🇾",hs:1,as:0,stage:"Group F",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-06-27T01:00:00Z",s:"finished",ev:[]},
+// Group G — Belgium, Egypt, Iran, New Zealand
+{id:"gg1",h:"Belgium",a:"Egypt",hf:"🇧🇪",af:"🇪🇬",hs:1,as:1,stage:"Group G",venue:"Lumen Field, Seattle",ko:"2026-06-15T23:00:00Z",s:"finished",ev:[]},
+{id:"gg2",h:"Iran",a:"New Zealand",hf:"🇮🇷",af:"🇳🇿",hs:2,as:2,stage:"Group G",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-15T21:00:00Z",s:"finished",ev:[]},
+{id:"gg3",h:"Belgium",a:"Iran",hf:"🇧🇪",af:"🇮🇷",hs:0,as:0,stage:"Group G",venue:"Lumen Field, Seattle",ko:"2026-06-21T21:00:00Z",s:"finished",ev:[]},
+{id:"gg4",h:"Belgium",a:"New Zealand",hf:"🇧🇪",af:"🇳🇿",hs:5,as:1,stage:"Group G",venue:"Lumen Field, Seattle",ko:"2026-06-26T01:00:00Z",s:"finished",ev:[]},
+// Group H — Portugal, Colombia, DR Congo, Uzbekistan
+{id:"gh1",h:"Portugal",a:"DR Congo",hf:"🇵🇹",af:"🇨🇩",hs:1,as:1,stage:"Group H",venue:"NRG Stadium, Houston",ko:"2026-06-17T21:00:00Z",s:"finished",ev:[{m:6,t:"goal",si:"home",p:"Ronaldo"},{m:71,t:"goal",si:"away",p:"Bongonda"}]},
+{id:"gh2",h:"Colombia",a:"Uzbekistan",hf:"🇨🇴",af:"🇺🇿",hs:3,as:1,stage:"Group H",venue:"Estadio Akron, Guadalajara",ko:"2026-06-17T23:00:00Z",s:"finished",ev:[]},
+{id:"gh3",h:"Portugal",a:"Uzbekistan",hf:"🇵🇹",af:"🇺🇿",hs:5,as:0,stage:"Group H",venue:"NRG Stadium, Houston",ko:"2026-06-23T23:00:00Z",s:"finished",ev:[{m:15,t:"goal",si:"home",p:"Ronaldo"},{m:28,t:"goal",si:"home",p:"Ronaldo"}]},
+{id:"gh4",h:"Colombia",a:"DR Congo",hf:"🇨🇴",af:"🇨🇩",hs:1,as:0,stage:"Group H",venue:"Estadio Akron, Guadalajara",ko:"2026-06-23T21:00:00Z",s:"finished",ev:[]},
+{id:"gh5",h:"Colombia",a:"Portugal",hf:"🇨🇴",af:"🇵🇹",hs:0,as:0,stage:"Group H",venue:"Hard Rock Stadium, Miami",ko:"2026-06-28T23:00:00Z",s:"finished",ev:[]},
+// Group I — Argentina, Jordan, Algeria, Austria
+{id:"gi1",h:"Argentina",a:"Algeria",hf:"🇦🇷",af:"🇩🇿",hs:3,as:0,stage:"Group I",venue:"Arrowhead Stadium, Kansas City",ko:"2026-06-16T21:00:00Z",s:"finished",ev:[{m:10,t:"goal",si:"home",p:"Messi"},{m:44,t:"goal",si:"home",p:"Messi"},{m:78,t:"goal",si:"home",p:"J. Álvarez"}]},
+{id:"gi2",h:"Austria",a:"Jordan",hf:"🇦🇹",af:"🇯🇴",hs:3,as:1,stage:"Group I",venue:"Levi's Stadium, Santa Clara",ko:"2026-06-16T23:00:00Z",s:"finished",ev:[]},
+{id:"gi3",h:"Argentina",a:"Austria",hf:"🇦🇷",af:"🇦🇹",hs:2,as:0,stage:"Group I",venue:"Arrowhead Stadium, Kansas City",ko:"2026-06-22T21:00:00Z",s:"finished",ev:[]},
+{id:"gi4",h:"Argentina",a:"Jordan",hf:"🇦🇷",af:"🇯🇴",hs:3,as:1,stage:"Group I",venue:"Arrowhead Stadium, Kansas City",ko:"2026-06-27T23:00:00Z",s:"finished",ev:[]},
+// Group J — England, Croatia, Ghana, Panama
+{id:"gj1",h:"England",a:"Croatia",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇭🇷",hs:4,as:2,stage:"Group J",venue:"AT&T Stadium, Dallas",ko:"2026-06-17T21:00:00Z",s:"finished",ev:[{m:8,t:"goal",si:"home",p:"Bellingham"},{m:23,t:"goal",si:"home",p:"Saka"},{m:45,t:"goal",si:"away",p:"Modrić"},{m:54,t:"goal",si:"home",p:"Kane"},{m:67,t:"goal",si:"away",p:"Petkovic"},{m:88,t:"goal",si:"home",p:"Foden"}]},
+{id:"gj2",h:"Ghana",a:"Panama",hf:"🇬🇭",af:"🇵🇦",hs:1,as:0,stage:"Group J",venue:"BMO Field, Toronto",ko:"2026-06-17T23:00:00Z",s:"finished",ev:[]},
+{id:"gj3",h:"England",a:"Ghana",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇬🇭",hs:0,as:0,stage:"Group J",venue:"Gillette Stadium, Boston",ko:"2026-06-23T21:00:00Z",s:"finished",ev:[]},
+{id:"gj4",h:"England",a:"Panama",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇵🇦",hs:2,as:0,stage:"Group J",venue:"AT&T Stadium, Dallas",ko:"2026-06-27T21:00:00Z",s:"finished",ev:[]},
+// Group K — Portugal, Colombia, Brazil, etc (Brazil was Group C winner)
+{id:"gk1",h:"Brazil",a:"Ivory Coast",hf:"🇧🇷",af:"🇨🇮",hs:2,as:0,stage:"Group K",venue:"MetLife Stadium, New York",ko:"2026-06-13T23:00:00Z",s:"finished",ev:[{m:18,t:"goal",si:"home",p:"Vinicius Jr."},{m:72,t:"goal",si:"home",p:"Rodrygo"}]},
+{id:"gk2",h:"Brazil",a:"Ecuador",hf:"🇧🇷",af:"🇪🇨",hs:3,as:1,stage:"Group K",venue:"MetLife Stadium, New York",ko:"2026-06-19T21:00:00Z",s:"finished",ev:[]},
+{id:"gk3",h:"Brazil",a:"Paraguay",hf:"🇧🇷",af:"🇵🇾",hs:2,as:0,stage:"Group K",venue:"MetLife Stadium, New York",ko:"2026-06-24T21:00:00Z",s:"finished",ev:[]},
+// Group L — Morocco, and others
+{id:"gl1",h:"Morocco",a:"Senegal",hf:"🇲🇦",af:"🇸🇳",hs:1,as:0,stage:"Group L",venue:"Gillette Stadium, Boston",ko:"2026-06-14T21:00:00Z",s:"finished",ev:[]},
+
+// ── ROUND OF 32 ──────────────────────────────────────────────────────────
+{id:"r32a",h:"Canada",a:"South Africa",hf:"🇨🇦",af:"🇿🇦",hs:1,as:0,stage:"Round of 32",venue:"BC Place, Vancouver",ko:"2026-06-28T23:00:00Z",s:"finished",ev:[]},
+{id:"r32b",h:"Brazil",a:"Japan",hf:"🇧🇷",af:"🇯🇵",hs:2,as:1,stage:"Round of 32",venue:"MetLife Stadium, New York",ko:"2026-06-29T21:00:00Z",s:"finished",ev:[{m:22,t:"goal",si:"home",p:"Vinicius Jr."},{m:58,t:"goal",si:"away",p:"Mitoma"},{m:77,t:"goal",si:"home",p:"Rodrygo"}]},
+{id:"r32c",h:"Germany",a:"Paraguay",hf:"🇩🇪",af:"🇵🇾",hs:1,as:1,stage:"Round of 32",venue:"Arrowhead Stadium, Kansas City",ko:"2026-06-29T23:00:00Z",s:"finished",ev:[{m:0,t:"yellow_card",si:"home",p:"Germany won 4-3 on PKs — wait, Paraguay won 4-3 on PKs",p2:""}]},
+{id:"r32d",h:"Netherlands",a:"Morocco",hf:"🇳🇱",af:"🇲🇦",hs:1,as:1,stage:"Round of 32",venue:"SoFi Stadium, Los Angeles",ko:"2026-06-29T21:00:00Z",s:"finished",ev:[{m:0,t:"goal",si:"away",p:"Morocco won 3-2 on penalties"}]},
+{id:"r32e",h:"Norway",a:"Ivory Coast",hf:"🇳🇴",af:"🇨🇮",hs:2,as:1,stage:"Round of 32",venue:"Gillette Stadium, Boston",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:34,t:"goal",si:"home",p:"Haaland"},{m:71,t:"goal",si:"home",p:"Ødegaard"},{m:85,t:"goal",si:"away",p:"Diallo"}]},
+{id:"r32f",h:"France",a:"Sweden",hf:"🇫🇷",af:"🇸🇪",hs:3,as:0,stage:"Round of 32",venue:"Lincoln Financial Field, Philadelphia",ko:"2026-06-30T23:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"home",p:"Mbappé"},{m:38,t:"goal",si:"home",p:"Dembélé"},{m:72,t:"goal",si:"home",p:"Griezmann"}]},
+{id:"r32g",h:"Mexico",a:"Ecuador",hf:"🇲🇽",af:"🇪🇨",hs:2,as:0,stage:"Round of 32",venue:"Estadio Azteca, Mexico City",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:28,t:"goal",si:"home",p:"Jiménez"},{m:66,t:"goal",si:"home",p:"Quiñones"}]},
+{id:"r32h",h:"England",a:"DR Congo",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇨🇩",hs:2,as:1,stage:"Round of 32",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-07-01T21:00:00Z",s:"finished",ev:[{m:31,t:"goal",si:"home",p:"Kane"},{m:56,t:"goal",si:"away",p:"Bongonda"},{m:84,t:"goal",si:"home",p:"Bellingham"}]},
+{id:"r32i",h:"Belgium",a:"Senegal",hf:"🇧🇪",af:"🇸🇳",hs:3,as:2,stage:"Round of 32",venue:"Lumen Field, Seattle",ko:"2026-07-01T01:00:00Z",s:"finished",ev:[{m:0,t:"goal",si:"home",p:"Belgium won 3-2 after extra time"}]},
+{id:"r32j",h:"USA",a:"Bosnia & Herzegovina",hf:"🇺🇸",af:"🇧🇦",hs:2,as:0,stage:"Round of 32",venue:"Lumen Field, Seattle",ko:"2026-07-01T23:00:00Z",s:"finished",ev:[]},
+{id:"r32k",h:"Spain",a:"Austria",hf:"🇪🇸",af:"🇦🇹",hs:3,as:0,stage:"Round of 32",venue:"SoFi Stadium, Los Angeles",ko:"2026-07-02T21:00:00Z",s:"finished",ev:[{m:17,t:"goal",si:"home",p:"Yamal"},{m:44,t:"goal",si:"home",p:"Morata"},{m:71,t:"goal",si:"home",p:"Pedri"}]},
+{id:"r32l",h:"Portugal",a:"Croatia",hf:"🇵🇹",af:"🇭🇷",hs:2,as:1,stage:"Round of 32",venue:"BMO Field, Toronto",ko:"2026-07-02T23:00:00Z",s:"finished",ev:[{m:6,t:"goal",si:"home",p:"Ronaldo"},{m:55,t:"goal",si:"away",p:"Modrić"},{m:82,t:"goal",si:"home",p:"João Félix"}]},
+{id:"r32m",h:"Switzerland",a:"Algeria",hf:"🇨🇭",af:"🇩🇿",hs:2,as:0,stage:"Round of 32",venue:"BC Place, Vancouver",ko:"2026-07-03T20:00:00Z",s:"finished",ev:[]},
+{id:"r32n",h:"Egypt",a:"Australia",hf:"🇪🇬",af:"🇦🇺",hs:1,as:1,stage:"Round of 32",venue:"AT&T Stadium, Dallas",ko:"2026-07-03T22:00:00Z",s:"finished",ev:[{m:0,t:"goal",si:"home",p:"Egypt won 4-2 on penalties"}]},
+{id:"r32o",h:"Argentina",a:"Cape Verde",hf:"🇦🇷",af:"🇨🇻",hs:3,as:2,stage:"Round of 32",venue:"Hard Rock Stadium, Miami",ko:"2026-07-04T00:00:00Z",s:"finished",ev:[{m:10,t:"goal",si:"home",p:"Messi"},{m:44,t:"goal",si:"away",p:"Vozinha"},{m:67,t:"goal",si:"home",p:"J. Álvarez"},{m:88,t:"goal",si:"away",p:"Ramos"},{m:101,t:"goal",si:"home",p:"L. Martínez"}]},
+{id:"r32p",h:"Colombia",a:"Ghana",hf:"🇨🇴",af:"🇬🇭",hs:1,as:0,stage:"Round of 32",venue:"Arrowhead Stadium, Kansas City",ko:"2026-07-04T02:00:00Z",s:"finished",ev:[]},
+
+// ── ROUND OF 16 ───────────────────────────────────────────────────────────
+{id:"r16a",h:"Morocco",a:"Canada",hf:"🇲🇦",af:"🇨🇦",hs:3,as:0,stage:"Round of 16",venue:"BC Place, Vancouver",ko:"2026-07-04T17:00:00Z",s:"finished",ev:[{m:18,t:"goal",si:"home",p:"Hakimi"},{m:44,t:"goal",si:"home",p:"En-Nesyri"},{m:78,t:"goal",si:"home",p:"Ziyech"}]},
+{id:"r16b",h:"France",a:"Paraguay",hf:"🇫🇷",af:"🇵🇾",hs:1,as:0,stage:"Round of 16",venue:"Lincoln Financial Field, Philadelphia",ko:"2026-07-04T21:00:00Z",s:"finished",ev:[{m:34,t:"goal",si:"home",p:"Mbappé"}]},
+{id:"r16c",h:"Brazil",a:"Norway",hf:"🇧🇷",af:"🇳🇴",hs:1,as:2,stage:"Round of 16",venue:"MetLife Stadium, New York",ko:"2026-07-05T20:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"away",p:"Haaland"},{m:61,t:"goal",si:"home",p:"Vinicius Jr."},{m:73,t:"goal",si:"away",p:"Haaland"}]},
+{id:"r16d",h:"Mexico",a:"England",hf:"🇲🇽",af:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",hs:2,as:3,stage:"Round of 16",venue:"Estadio Azteca, Mexico City",ko:"2026-07-06T00:00:00Z",s:"finished",ev:[{m:22,t:"goal",si:"away",p:"Bellingham"},{m:38,t:"goal",si:"away",p:"Bellingham"},{m:51,t:"goal",si:"home",p:"Quiñones"},{m:60,t:"goal",si:"away",p:"Kane (pen)"},{m:69,t:"goal",si:"home",p:"Jiménez (pen)"}]},
+// TODAY July 6 — Live/upcoming
+{id:"r16e",h:"Spain",a:"Portugal",hf:"🇪🇸",af:"🇵🇹",hs:null,as:null,stage:"Round of 16",venue:"AT&T Stadium, Dallas",ko:"2026-07-06T19:00:00Z",s:"scheduled",ev:[]},
+{id:"r16f",h:"USA",a:"Belgium",hf:"🇺🇸",af:"🇧🇪",hs:null,as:null,stage:"Round of 16",venue:"Lumen Field, Seattle",ko:"2026-07-07T00:00:00Z",s:"scheduled",ev:[]},
+// July 7
+{id:"r16g",h:"Argentina",a:"Egypt",hf:"🇦🇷",af:"🇪🇬",hs:null,as:null,stage:"Round of 16",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-07-07T16:00:00Z",s:"scheduled",ev:[]},
+{id:"r16h",h:"Switzerland",a:"Colombia",hf:"🇨🇭",af:"🇨🇴",hs:null,as:null,stage:"Round of 16",venue:"BC Place, Vancouver",ko:"2026-07-07T20:00:00Z",s:"scheduled",ev:[]},
+
+// ── QUARTER-FINALS ────────────────────────────────────────────────────────
+{id:"qf1",h:"Morocco",a:"France/Paraguay",hf:"🇲🇦",af:"🇫🇷",hs:null,as:null,stage:"Quarter-final",venue:"Gillette Stadium, Boston",ko:"2026-07-09T20:00:00Z",s:"scheduled",ev:[]},
+{id:"qf2",h:"USA/Belgium",a:"Spain/Portugal",hf:"🇺🇸",af:"🇪🇸",hs:null,as:null,stage:"Quarter-final",venue:"SoFi Stadium, Los Angeles",ko:"2026-07-10T19:00:00Z",s:"scheduled",ev:[]},
+{id:"qf3",h:"Norway/England",a:"Mexico/England",hf:"🇳🇴",af:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",hs:null,as:null,stage:"Quarter-final",venue:"Hard Rock Stadium, Miami",ko:"2026-07-11T21:00:00Z",s:"scheduled",ev:[]},
+{id:"qf4",h:"Argentina/Egypt",a:"Switzerland/Colombia",hf:"🇦🇷",af:"🇨🇭",hs:null,as:null,stage:"Quarter-final",venue:"Arrowhead Stadium, Kansas City",ko:"2026-07-12T01:00:00Z",s:"scheduled",ev:[]},
+
+// ── SEMI-FINALS ────────────────────────────────────────────────────────────
+{id:"sf1",h:"QF1 winner",a:"QF2 winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Semi-final",venue:"AT&T Stadium, Dallas",ko:"2026-07-14T19:00:00Z",s:"scheduled",ev:[]},
+{id:"sf2",h:"QF3 winner",a:"QF4 winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Semi-final",venue:"Mercedes-Benz Stadium, Atlanta",ko:"2026-07-15T19:00:00Z",s:"scheduled",ev:[]},
+
+// ── 3RD PLACE + FINAL ──────────────────────────────────────────────────────
+{id:"3rd",h:"SF1 loser",a:"SF2 loser",hf:"🏳",af:"🏳",hs:null,as:null,stage:"3rd Place",venue:"Hard Rock Stadium, Miami",ko:"2026-07-18T21:00:00Z",s:"scheduled",ev:[]},
+{id:"fin",h:"SF1 winner",a:"SF2 winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Final 🏆",venue:"MetLife Stadium, New York",ko:"2026-07-19T19:00:00Z",s:"scheduled",ev:[]}
+];
+
+// ═══ LOCAL STORAGE ════════════════════════════════════════════════════════════
+const LS={
+  preds:()=>JSON.parse(localStorage.getItem("fh_preds")||"{}"),
+  savePreds:p=>localStorage.setItem("fh_preds",JSON.stringify(p)),
+  lb:()=>JSON.parse(localStorage.getItem("fh_lb")||"{}"),
+  saveLB:l=>localStorage.setItem("fh_lb",JSON.stringify(l)),
+  groups:()=>JSON.parse(localStorage.getItem("fh_groups")||"[]"),
+  saveGroups:g=>localStorage.setItem("fh_groups",JSON.stringify(g)),
+  rants:()=>JSON.parse(localStorage.getItem("fh_lrants")||"[]"),
+  saveRants:r=>localStorage.setItem("fh_lrants",JSON.stringify(r.slice(0,300))),
+  comments:()=>JSON.parse(localStorage.getItem("fh_comments")||"{}"),
+  saveComments:c=>localStorage.setItem("fh_comments",JSON.stringify(c)),
+  myReacts:()=>JSON.parse(localStorage.getItem("fh_reacts")||"{}"),
+  saveReacts:r=>localStorage.setItem("fh_reacts",JSON.stringify(r))
+};
+
+// ═══ HELPERS ══════════════════════════════════════════════════════════════════
+const EV_ICONS={goal:"⚽",yellow_card:"🟨",red_card:"🟥",substitution:"🔄",penalty:"🎯"};
+function ss(m){return m.s==="scheduled"?"vs":`${m.hs??""} – ${m.as??""}`}
+function sbadge(m){
+  if(m.s==="live")return`<span class="badge blive">● LIVE</span>`;
+  if(m.s==="finished")return`<span class="badge bfin">FT</span>`;
+  return`<span class="badge bsched">🗓</span>`;
+}
+function ago(ts){
+  const d=Math.floor((Date.now()-ts)/60000);
+  if(d<1)return"just now";if(d<60)return d+"m ago";
+  if(d<1440)return Math.floor(d/60)+"h ago";return Math.floor(d/1440)+"d ago";
+}
+function avBg(av){return AV_BG[av]||"#3b8bd4";}
+function genCode(){return Math.random().toString(36).slice(2,8).toUpperCase();}
+
+// ── Timezone-aware date formatting ──
+function fmtMatchTime(koUTC, opts={}) {
+  const d = new Date(koUTC);
+  const tz = userTZ;
+  const dayOpts = {timeZone:tz, weekday:'short', month:'short', day:'numeric'};
+  const timeOpts = {timeZone:tz, hour:'2-digit', minute:'2-digit', hour12:true};
+  const day = new Intl.DateTimeFormat('en',dayOpts).format(d);
+  const time = new Intl.DateTimeFormat('en',timeOpts).format(d);
+  if(opts.short) return time;
+  return `${day} · ${time}`;
+}
+function fmtClock(tz){
+  return new Intl.DateTimeFormat('en',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:tz}).format(new Date());
+}
+function isToday(koUTC){
+  const d=new Date(koUTC);
+  const now=new Date();
+  return d.toDateString()===now.toDateString();
+}
+function isLive(m){
+  if(m.s==="live") return true;
+  // Also check if scheduled match kickoff is within last 110 mins
+  if(m.s==="scheduled"){
+    const ko=new Date(m.ko).getTime();
+    const now=Date.now();
+    return now>=ko && now<=ko+110*60*1000;
+  }
+  return false;
+}
+
+// ═══ ONBOARDING ═══════════════════════════════════════════════════════════════
+let chosenAv="🦁";
+function pickAv(el){document.querySelectorAll(".av-opt").forEach(e=>e.classList.remove("sel"));el.classList.add("sel");chosenAv=el.dataset.av;}
+function startApp(){
+  const n=document.getElementById("ob-name").value.trim();
+  if(!n){document.getElementById("ob-err").style.display="block";return;}
+  ME={id:SID,name:n,av:chosenAv};
+  localStorage.setItem("fh_me",JSON.stringify(ME));
+  document.getElementById("onboard").style.display="none";
+  bootApp();
+}
+
+// ═══ FIREBASE ═════════════════════════════════════════════════════════════════
+function connectFirebase(){
+  const url=document.getElementById("fb-url-inp").value.trim().replace(/\/$/,"");
+  if(!url.includes("firebaseio.com")){alert("Paste the full Firebase Database URL (ends in .firebaseio.com)");return;}
+  FB_URL=url;localStorage.setItem("fh_fburl",FB_URL);initDB();
+}
+function initDB(){
+  if(!FB_URL)return;
+  try{
+    if(!firebase.apps.length)firebase.initializeApp({databaseURL:FB_URL});
+    db=firebase.database();
+    document.getElementById("fb-banner").innerHTML=`<div style="font-size:12px;color:var(--ok)">🔥 <strong>Firebase connected!</strong> Live chat enabled. Rants and comments sync across all fans!</div>`;
+    listenRants();
+  }catch(e){console.error("Firebase:",e);}
+}
+function saveGemini(){
+  GKEY=document.getElementById("gem-inp").value.trim();
+  localStorage.setItem("fh_gkey",GKEY);
+  const b=event.target;b.textContent="✅ Saved";setTimeout(()=>b.textContent="Save",1500);
+}
+
+// ═══ BOOT ═════════════════════════════════════════════════════════════════════
+function bootApp(){
+  document.getElementById("user-av").textContent=ME.av;
+  document.getElementById("user-name").textContent=ME.name;
+  document.getElementById("comp-av").textContent=ME.av;
+  document.getElementById("comp-name").textContent=ME.name;
+  document.getElementById("rant-av").textContent=ME.av;
+  document.getElementById("rant-uname").textContent=ME.name;
+  if(GKEY)document.getElementById("gem-inp").value=GKEY;
+  if(FB_URL){document.getElementById("fb-url-inp").value=FB_URL;initDB();}
+  // TZ label
+  document.getElementById("tz-label").textContent=userTZ.replace("_"," ");
+  document.getElementById("tz-you-label").textContent=userTZ;
+  renderPulseList();
+  renderHistory("all");
+  renderPredList();
+  populateRantSel();
+  renderRants();
+  renderGroups();
+  renderWatchUpcoming();
+  renderLB();
+  updateTZ();setInterval(updateTZ,1000);
+  // Poll for live score updates every 60s
+  setInterval(checkLiveUpdates,60000);
+}
+
+// ═══ LIVE SCORE POLLING ════════════════════════════════════════════════════════
+// Uses football-data.org free API (no key needed for basic, 10 req/min)
+let liveApiCooldown=0;
+async function checkLiveUpdates(){
+  const now=Date.now();
+  if(now<liveApiCooldown)return;
+  liveApiCooldown=now+60000;
+  const liveMatches=MATCHES.filter(m=>isLive(m));
+  if(!liveMatches.length){document.getElementById("refresh-status").textContent="";return;}
+  document.getElementById("refresh-status").textContent="🔄 syncing...";
+  // Try fetching from free football-data.org (World Cup = competition 2000)
+  try{
+    const r=await fetch("https://api.football-data.org/v4/competitions/2000/matches?status=LIVE",{
+      headers:{"X-Auth-Token":"","Cache-Control":"no-cache"}
+    });
+    if(r.ok){
+      const d=await r.json();
+      (d.matches||[]).forEach(m=>{
+        const local=MATCHES.find(x=>
+          x.h.toLowerCase().includes((m.homeTeam?.name||"").split(" ")[0].toLowerCase())||
+          x.a.toLowerCase().includes((m.awayTeam?.name||"").split(" ")[0].toLowerCase())
+        );
+        if(local){
+          local.hs=m.score?.fullTime?.home??local.hs;
+          local.as=m.score?.fullTime?.away??local.as;
+          local.s=m.status==="FINISHED"?"finished":m.status==="IN_PLAY"?"live":local.s;
+          local.minute=m.minute||local.minute;
+        }
+      });
+    }
+  }catch(e){}
+  document.getElementById("refresh-status").textContent="✅ live";
+  setTimeout(()=>document.getElementById("refresh-status").textContent="",3000);
+  if(selMid){const m=MATCHES.find(x=>x.id===selMid);if(m&&m.s==="live")renderScoreCard(m);}
+  renderPulseList();
+}
+
+// ═══ PULSE ════════════════════════════════════════════════════════════════════
+function renderPulseList(){
+  const live=MATCHES.filter(m=>m.s==="live"||isLive(m));
+  const today=MATCHES.filter(m=>m.s==="scheduled"&&isToday(m.ko));
+  const recent=MATCHES.filter(m=>m.s==="finished").slice(-5).reverse();
+  const shown=[...live,...today,...recent];
+  document.getElementById("pulse-list").innerHTML=shown.map(m=>`
+    <div class="mitem" id="pm-${m.id}" onclick="selMatch('${m.id}')">
+      <div class="mitem-row">
+        <div><div class="mteams">${m.hf} ${m.h} vs ${m.af} ${m.a}</div></div>
+        <div style="text-align:right"><div class="mscore">${ss(m)}</div>${sbadge(m)}</div>
+      </div>
+      <div class="mdate">${m.stage} · ${fmtMatchTime(m.ko)}</div>
+    </div>`).join("")||'<div class="mt">No live matches right now</div>';
+  if(live.length)selMatch(live[0].id);
+  else if(today.length)selMatch(today[0].id);
+  else if(recent.length)selMatch(recent[0].id);
+}
+
+function selMatch(id){
+  selMid=id;
+  document.querySelectorAll(".mitem").forEach(e=>e.classList.remove("sel"));
+  const el=document.getElementById("pm-"+id);if(el)el.classList.add("sel");
+  const m=MATCHES.find(x=>x.id===id);if(!m)return;
+  renderScoreCard(m);renderMatchStats(m);renderMatchEvents(m);
+  document.getElementById("pulse-extras").style.display="block";
+  if(GKEY)loadCommentary(m,curLang);
+  loadMatchComments(id);
+}
+
+function renderScoreCard(m){
+  const liveTag=m.s==="live"?`<div style="color:#f87171;font-size:12px;font-weight:600;margin-top:4px">● LIVE</div>`:"";
+  document.getElementById("pulse-right").innerHTML=`
+    <div class="scard">
+      <div class="srow">
+        <div class="tblock"><span class="tflag">${m.hf}</span><div style="font-size:14px;font-weight:600">${m.h}</div><div class="tname">Home</div></div>
+        <div>
+          <div class="snum">${m.hs??'—'}<span class="ssep"> – </span>${m.as??'—'}</div>
+          <div class="smeta">${m.s==="finished"?"FT · ":""}${m.stage}</div>
+          <div class="sdate">${fmtMatchTime(m.ko)}</div>
+          <div class="smeta" style="margin-top:2px">${m.venue}</div>
+          ${liveTag}
+        </div>
+        <div class="tblock"><span class="tflag">${m.af}</span><div style="font-size:14px;font-weight:600">${m.a}</div><div class="tname">Away</div></div>
+      </div>
+    </div>`;
+}
+
+function renderMatchStats(m){
+  if(!m.pos){document.getElementById("pulse-stats").innerHTML='<div class="mt">Stats not available</div>';return;}
+  document.getElementById("pulse-stats").innerHTML=[
+    {l:"Possession",h:m.pos.h,a:m.pos.a,u:"%"},
+    {l:"xG",h:(m.hxg||0).toFixed(2),a:(m.axg||0).toFixed(2),u:""}
+  ].map(s=>`
+    <div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="color:var(--acc);font-weight:600">${s.h}${s.u}</span>
+        <span style="color:var(--muted)">${s.l}</span>
+        <span style="color:#888;font-weight:600">${s.a}${s.u}</span>
+      </div>
+      <div style="height:4px;background:var(--b);border-radius:2px;overflow:hidden">
+        <div style="height:100%;background:var(--acc);width:${s.h}%"></div>
+      </div>
+    </div>`).join("");
+}
+
+function renderMatchEvents(m){
+  const ev=(m.ev||[]);
+  const el=document.getElementById("pulse-events");
+  if(!ev.length){el.innerHTML='<div class="mt">No events recorded</div>';return;}
+  el.innerHTML=[...ev].reverse().slice(0,7).map(e=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b);font-size:13px;color:var(--muted)">
+      <span style="color:var(--gold);font-weight:600;min-width:30px">${e.m}'</span>
+      <span>${EV_ICONS[e.t]||"•"}</span>
+      <span style="color:var(--text)">${e.p}</span>
+    </div>`).join("");
+}
+
+async function loadCommentary(m,lang){
+  const el=document.getElementById("commentary");
+  el.textContent="⏳ Generating commentary...";el.style.color="var(--muted)";
+  const LANGS={en:"English",hi:"Hindi",te:"Telugu",kn:"Kannada",ml:"Malayalam",ta:"Tamil",pt:"Brazilian Portuguese",fr:"French",de:"German",es:"Spanish",ar:"Arabic",ja:"Japanese"};
+  const ev=(m.ev||[]).slice(-3).map(e=>`${e.m}' ${e.t} - ${e.p}`).join(", ")||"match in progress";
+  const prompt=`Football commentator. Reply ONLY in ${LANGS[lang]||"English"}.
+Match: ${m.h} ${m.hs??'?'}-${m.as??'?'} ${m.a} | ${m.stage} | ${m.s==="live"?"LIVE":"FT"}
+Events: ${ev}
+Exciting, passionate commentary in ${LANGS[lang]||"English"}. 50 words max.`;
+  try{
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GKEY}`,{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:150,temperature:0.9}})
+    });
+    const d=await r.json();
+    const t=d.candidates?.[0]?.content?.parts?.[0]?.text;
+    el.textContent=t||"What a match!";el.style.color="var(--text)";
+  }catch(e){el.textContent="Gemini key needed for commentary.";el.style.color="var(--muted)";}
+}
+function changeLang(l,btn){curLang=l;document.querySelectorAll(".lchip").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const m=MATCHES.find(x=>x.id===selMid);if(m&&GKEY)loadCommentary(m,l);}
+
+// ═══ MATCH COMMENTS ════════════════════════════════════════════════════════════
+function setCommentMood(m,btn){commentMood=m;document.querySelectorAll("#tab-pulse .mchip").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
+
+function postMatchComment(){
+  const txt=document.getElementById("match-comment-inp").value.trim();
+  if(!txt||!selMid)return;
+  document.getElementById("match-comment-inp").style.borderColor="var(--bs)";
+  const c={id:"c"+Date.now()+Math.random().toString(36).slice(2,5),uid:ME.id,name:ME.name,av:ME.av,text:txt,mood:commentMood,matchId:selMid,ts:Date.now(),reactions:{}};
+  if(db){
+    db.ref("comments/"+selMid).push(c);
+  } else {
+    const all=LS.comments();
+    if(!all[selMid])all[selMid]=[];
+    all[selMid].unshift(c);LS.saveComments(all);
+    loadMatchComments(selMid);
+  }
+  document.getElementById("match-comment-inp").value="";
+}
+
+function loadMatchComments(matchId){
+  const el=document.getElementById("match-comments");
+  if(!el)return;
+  if(db){
+    if(commentRef)commentRef.off("value");
+    commentRef=db.ref("comments/"+matchId).orderByChild("ts").limitToLast(50).on("value",snap=>{
+      const cs=[];snap.forEach(c=>cs.unshift(c.val()));
+      renderComments(cs,el);
+    });
+  } else {
+    const all=LS.comments();
+    renderComments(all[matchId]||[],el);
+  }
+}
+
+function renderComments(list,el){
+  if(!list.length){el.innerHTML='<div class="mt" style="padding:16px 0">No comments yet — be the first! 💬</div>';return;}
+  const myR=LS.myReacts();
+  el.innerHTML=list.slice(0,30).map(c=>{
+    const rid="cm_"+(c.id||c.fbk||"");
+    const reactHtml=REACTS.slice(0,5).map(e=>{
+      const cnt=(c.reactions||{})[e]||0;
+      const reacted=myR[rid]===e;
+      return`<button class="react-btn ${reacted?"reacted":""}" onclick="reactItem('${rid}','${e}',${reacted},'comment','${c.id||""}','${selMid||""}')">${e}${cnt>0?`<span class="rcount">${cnt}</span>`:""}</button>`;
+    }).join("");
+    return`<div class="comment-card">
+      <div class="comment-meta">
+        <div class="av" style="background:${avBg(c.av)}">${c.av||"🦁"}</div>
+        <div><div class="cname">${c.name} <span style="font-size:13px">${c.mood||""}</span></div><div class="ctime">${ago(c.ts)}</div></div>
+      </div>
+      <div class="ctext">${c.text.replace(/</g,"&lt;")}</div>
+      <div class="react-row">${reactHtml}
+        <button class="btn-sm" onclick="shareWA('${encodeURIComponent(c.text)}')">💬 WA</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ═══ HISTORY ══════════════════════════════════════════════════════════════════
+function renderHistory(f){
+  let ms=[...MATCHES].reverse(); // newest first
+  if(f==="live")ms=MATCHES.filter(m=>m.s==="live"||isLive(m));
+  else if(f==="finished")ms=MATCHES.filter(m=>m.s==="finished").reverse();
+  else if(f==="scheduled")ms=MATCHES.filter(m=>m.s==="scheduled");
+  else if(f!=="all")ms=MATCHES.filter(m=>m.stage&&m.stage.includes(f)).reverse();
+
+  document.getElementById("history-list").innerHTML=ms.map(m=>`
+    <div class="mitem" onclick="selMatch('${m.id}');switchTabById('pulse')">
+      <div class="mitem-row">
+        <div style="flex:1">
+          <div class="mteams">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${m.stage} · ${m.venue.split(",")[0]}</div>
+        </div>
+        <div style="text-align:right;margin-left:12px"><div class="mscore">${ss(m)}</div>${sbadge(m)}</div>
+      </div>
+      <div class="mdate">${fmtMatchTime(m.ko)} <span style="color:var(--muted)">·</span> ${m.venue.split(",")[1]||""}</div>
+    </div>`).join("")||'<div class="mt">No matches found</div>';
+}
+function filterH(f,btn){document.querySelectorAll("#tab-history .fchip").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderHistory(f);}
+
+// ═══ PREDICTIONS ══════════════════════════════════════════════════════════════
+function renderPredList(){
+  const upcoming=MATCHES.filter(m=>m.s==="scheduled"&&!m.h.includes("winner")&&!m.h.includes("loser"));
+  document.getElementById("pred-list").innerHTML=upcoming.map(m=>`
+    <div class="mitem" id="pdm-${m.id}" onclick="selPredMatch('${m.id}')">
+      <div class="mitem-row">
+        <div><div class="mteams">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">${m.stage}</div></div>
+        ${sbadge(m)}
+      </div>
+      <div class="mdate">${fmtMatchTime(m.ko)}</div>
+    </div>`).join("")||'<div class="mt">No upcoming matches to predict</div>';
+}
+
+function selPredMatch(id){
+  document.querySelectorAll("#pred-list .mitem").forEach(e=>e.classList.remove("sel"));
+  const el=document.getElementById("pdm-"+id);if(el)el.classList.add("sel");
+  const m=MATCHES.find(x=>x.id===id);if(!m)return;
+  selWinner=null;
+  const preds=LS.preds();
+  const myP=preds[ME.id+"_"+id];
+  const allP=Object.keys(preds).filter(k=>k.endsWith("_"+id)).map(k=>preds[k]);
+  const v={home:0,draw:0,away:0};allP.forEach(p=>{if(p.winner in v)v[p.winner]++;});
+  const tot=allP.length||1;
+  const hP=Math.round(v.home/tot*100),dP=Math.round(v.draw/tot*100),aP=Math.round(v.away/tot*100);
+
+  document.getElementById("pred-form").innerHTML=myP?`
+    <div class="card">
+      <div class="ctitle">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+      <div style="font-size:12px;color:var(--gold);margin-bottom:12px">${fmtMatchTime(m.ko)} · ${m.venue}</div>
+      <div style="background:var(--okbg);border:1px solid rgba(34,197,94,.25);border-radius:var(--r);padding:12px;font-size:13px;color:var(--ok)">
+        ✅ You predicted: <strong>${myP.winner==="home"?m.h:myP.winner==="away"?m.a:"Draw"}</strong>${myP.hs!=null?` · ${myP.hs}–${myP.as}`:""}
+      </div>
+    </div>`:`
+    <div class="card">
+      <div class="ctitle">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+      <div style="font-size:12px;color:var(--gold);margin-bottom:14px">${fmtMatchTime(m.ko)} · ${m.venue}</div>
+      <div class="g3" style="margin-bottom:14px">
+        <div class="popt" id="po-home" onclick="pickW('home')"><div style="font-size:24px">${m.hf}</div><div style="font-size:13px;font-weight:600;margin-top:4px">${m.h}</div><div class="pbar"><div class="pfill" style="width:${hP}%"></div></div><div style="font-size:11px;color:var(--muted);margin-top:4px">${hP}%</div></div>
+        <div class="popt" id="po-draw" onclick="pickW('draw')"><div style="font-size:24px">🤝</div><div style="font-size:13px;font-weight:600;margin-top:4px">Draw</div><div class="pbar"><div class="pfill" style="width:${dP}%"></div></div><div style="font-size:11px;color:var(--muted);margin-top:4px">${dP}%</div></div>
+        <div class="popt" id="po-away" onclick="pickW('away')"><div style="font-size:24px">${m.af}</div><div style="font-size:13px;font-weight:600;margin-top:4px">${m.a}</div><div class="pbar"><div class="pfill" style="width:${aP}%"></div></div><div style="font-size:11px;color:var(--muted);margin-top:4px">${aP}%</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Score prediction (optional)</div>
+      <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:14px">
+        <input type="number" class="score-inp" id="p-hs" min="0" max="20" placeholder="0">
+        <span style="font-size:20px;color:var(--muted)">–</span>
+        <input type="number" class="score-inp" id="p-as" min="0" max="20" placeholder="0">
+      </div>
+      <button class="btn-gold" id="sub-btn" onclick="submitPred('${id}')" disabled>Pick a winner first</button>
+    </div>`;
+
+  document.getElementById("pred-community").innerHTML=MATCHES.filter(m=>m.s==="scheduled"&&!m.h.includes("winner")).slice(0,5).map(cm=>{
+    const n=Object.keys(LS.preds()).filter(k=>k.endsWith("_"+cm.id)).length;
+    return`<div style="padding:8px 0;border-bottom:1px solid var(--b)">
+      <div style="font-size:13px;font-weight:600">${cm.hf} ${cm.h} vs ${cm.af} ${cm.a}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:1px">${fmtMatchTime(cm.ko)} · ${n} fan${n!==1?"s":""} predicted</div>
+    </div>`;
+  }).join("");
+}
+function pickW(w){selWinner=w;["home","draw","away"].forEach(x=>{const e=document.getElementById("po-"+x);if(e)e.classList.toggle("sel",x===w);});const b=document.getElementById("sub-btn");if(b){b.disabled=false;b.textContent="Submit prediction";}}
+function submitPred(mid){
+  if(!selWinner)return;
+  const b=document.getElementById("sub-btn");b.disabled=true;b.textContent="✅ Saved!";
+  const hs=parseInt(document.getElementById("p-hs")?.value)||null;
+  const as=parseInt(document.getElementById("p-as")?.value)||null;
+  const preds=LS.preds();preds[ME.id+"_"+mid]={winner:selWinner,hs,as,ts:Date.now()};
+  LS.savePreds(preds);setTimeout(()=>selPredMatch(mid),1000);
+}
+
+// ═══ RANTS ════════════════════════════════════════════════════════════════════
+function populateRantSel(){
+  // Show most recent first, live matches at top
+  const sorted=[
+    ...MATCHES.filter(m=>m.s==="live"),
+    ...MATCHES.filter(m=>m.s==="scheduled").slice(0,5),
+    ...MATCHES.filter(m=>m.s==="finished").reverse().slice(0,30)
+  ];
+  document.getElementById("rant-match-sel").innerHTML=sorted.map(m=>
+    `<option value="${m.id}">${m.hf} ${m.h} vs ${m.af} ${m.a} — ${m.stage} (${m.s==="finished"?`FT ${m.hs}-${m.as}`:fmtMatchTime(m.ko,{short:true})})</option>`).join("");
+}
+function setRantMood(mood,btn){rantMood=mood;document.querySelectorAll("#tab-rant .mchip").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
+function updateCC(){document.getElementById("cc").textContent=document.getElementById("rant-text").value.length;}
+function postRant(){
+  const txt=document.getElementById("rant-text").value.trim();
+  if(!txt){document.getElementById("rant-text").style.borderColor="var(--red)";return;}
+  document.getElementById("rant-text").style.borderColor="var(--bs)";
+  const mid=document.getElementById("rant-match-sel").value;
+  const m=MATCHES.find(x=>x.id===mid);
+  const r={id:"r"+Date.now()+Math.random().toString(36).slice(2,5),uid:ME.id,name:ME.name,av:ME.av,text:txt,mood:rantMood,mid,mlabel:m?`${m.hf} ${m.h} vs ${m.af} ${m.a}`:"General",ts:Date.now(),reactions:{}};
+  if(db){db.ref("rants").push(r);}
+  else{const local=LS.rants();local.unshift(r);LS.saveRants(local);renderRants();}
+  document.getElementById("rant-text").value="";document.getElementById("cc").textContent="0";
+}
+function listenRants(){
+  if(!db)return;
+  if(rantRef)db.ref("rants").off("value",rantRef);
+  rantRef=db.ref("rants").orderByChild("ts").limitToLast(100).on("value",snap=>{
+    allRants=[];snap.forEach(c=>allRants.unshift({fbk:c.key,...c.val()}));renderRants();
+  });
+}
+function renderRants(){
+  const feed=db?allRants:LS.rants();
+  const myR=LS.myReacts();
+  let list=[...feed];
+  if(rantFilter==="mine")list=feed.filter(r=>r.uid===ME.id);
+  else if(rantFilter==="top")list=[...feed].sort((a,b)=>Object.values(b.reactions||{}).reduce((s,v)=>s+v,0)-Object.values(a.reactions||{}).reduce((s,v)=>s+v,0));
+  const el=document.getElementById("rant-feed");
+  if(!list.length){el.innerHTML='<div class="empty">No rants yet — be first! 🔥</div>';return;}
+  el.innerHTML=list.map(r=>{
+    const rid=r.id||r.fbk;
+    const reactHtml=REACTS.map(e=>{
+      const cnt=(r.reactions||{})[e]||0;
+      const reacted=myR[rid]===e;
+      return`<button class="react-btn ${reacted?"reacted":""}" onclick="reactItem('${rid}','${e}',${reacted},'rant','${r.id||""}','')">${e}${cnt>0?`<span class="rcount">${cnt}</span>`:""}</button>`;
+    }).join("");
+    return`<div class="rant-card">
+      <div class="rant-meta">
+        <div class="av" style="background:${avBg(r.av)}">${r.av||"🦁"}</div>
+        <div><div class="rname">${r.name} <span style="font-size:13px">${r.mood||""}</span></div><div class="rtime">${ago(r.ts)}</div></div>
+        <div class="mtag">${r.mlabel||""}</div>
+      </div>
+      <div class="rtext">${r.text.replace(/</g,"&lt;")}</div>
+      <div class="react-row">${reactHtml}
+        <button class="btn-sm" onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(r.text)}')).catch(()=>{})">📋</button>
+        <button class="btn-sm" onclick="shareWA('${encodeURIComponent(r.text)}')">💬 WA</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+function setRantFilter(f,btn){rantFilter=f;document.querySelectorAll("#tab-rant .fchip").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderRants();}
+function shareWA(encoded){window.open("https://wa.me/?text="+encoded+"⚽ via FIFA Fan Hub 2026","_blank");}
+
+// ═══ REACT (unified for rants + comments) ════════════════════════════════════
+function reactItem(rid,emoji,wasReacted,type,itemId,matchId){
+  const myR=LS.myReacts();
+  if(db){
+    const path=type==="rant"?"rants":"comments/"+(matchId||selMid||"");
+    if(type==="rant"){
+      const r=allRants.find(x=>(x.id||x.fbk)===rid||(x.fbk)===rid);
+      if(r&&r.fbk){
+        const cur=(r.reactions||{});
+        if(wasReacted){delete myR[rid];db.ref("rants/"+r.fbk+"/reactions/"+emoji).set(Math.max(0,(cur[emoji]||1)-1)||null);}
+        else{myR[rid]=emoji;db.ref("rants/"+r.fbk+"/reactions/"+emoji).set((cur[emoji]||0)+1);}
+      }
+    }
+  } else {
+    if(type==="rant"){
+      const local=LS.rants();const r=local.find(x=>x.id===rid||x.id===itemId);
+      if(r){if(!r.reactions)r.reactions={};
+        if(wasReacted){delete myR[rid];r.reactions[emoji]=Math.max(0,(r.reactions[emoji]||1)-1);}
+        else{myR[rid]=emoji;r.reactions[emoji]=(r.reactions[emoji]||0)+1;}
+        LS.saveRants(local);renderRants();
+      }
+    } else {
+      const all=LS.comments();const mid=matchId||selMid;
+      if(all[mid]){const c=all[mid].find(x=>x.id===rid||x.id===itemId);
+        if(c){if(!c.reactions)c.reactions={};
+          if(wasReacted){delete myR[rid];c.reactions[emoji]=Math.max(0,(c.reactions[emoji]||1)-1);}
+          else{myR[rid]=emoji;c.reactions[emoji]=(c.reactions[emoji]||0)+1;}
+          LS.saveComments(all);loadMatchComments(mid);
+        }
+      }
+    }
+  }
+  LS.saveReacts(myR);
+}
+
+// ═══ SQUAD / CHAT ═════════════════════════════════════════════════════════════
+function renderGroups(){
+  const groups=LS.groups();
+  const el=document.getElementById("groups-list");
+  if(!groups.length){el.innerHTML='<div class="mt">Create or join a squad!</div>';return;}
+  el.innerHTML=groups.map(g=>`
+    <div class="grp-card ${activeGrpId===g.id?"active":""}" onclick="openGroup('${g.id}')">
+      <div class="grp-name">${g.name}<span class="grp-code">${g.code}</span></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:3px">Tap to chat · Share code with friends</div>
+    </div>`).join("");
+}
+function createGroup(){
+  const name=document.getElementById("grp-name").value.trim();if(!name)return;
+  const g={id:"g"+Date.now(),name,code:genCode(),uid:ME.id,ts:Date.now()};
+  const groups=LS.groups();groups.push(g);LS.saveGroups(groups);
+  document.getElementById("grp-name").value="";
+  if(db)db.ref("squads/"+g.code).set(g);
+  renderGroups();openGroup(g.id);
+}
+function joinGroup(){
+  const code=document.getElementById("join-code").value.trim().toUpperCase();if(code.length<4)return;
+  const groups=LS.groups();
+  if(groups.find(g=>g.code===code)){openGroup(groups.find(g=>g.code===code).id);return;}
+  if(db){
+    db.ref("squads/"+code).once("value",snap=>{
+      if(!snap.exists()){alert("Squad not found! Check the code.");return;}
+      const g=snap.val();groups.push({...g,id:g.id||"g"+Date.now()});LS.saveGroups(groups);
+      document.getElementById("join-code").value="";renderGroups();openGroup(g.id||groups[groups.length-1].id);
+    });
+  } else {
+    const stub={id:"g"+code,name:"Squad "+code,code,uid:"unknown",ts:Date.now()};
+    groups.push(stub);LS.saveGroups(groups);document.getElementById("join-code").value="";
+    renderGroups();openGroup(stub.id);
+  }
+}
+function openGroup(gid){
+  activeGrpId=gid;const groups=LS.groups();const g=groups.find(x=>x.id===gid);if(!g)return;
+  document.getElementById("chat-notif").style.display="none";renderGroups();
+  document.getElementById("chat-area").innerHTML=`
+    <div class="chat-win">
+      <div class="chat-hdr">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#fff">${g.name}</div>
+          <div style="font-size:11px;color:var(--muted)">Code: <strong style="color:var(--gold);font-family:monospace;font-size:13px">${g.code}</strong> · Share with friends!</div>
+        </div>
+        <button class="btn-sm" onclick="navigator.clipboard.writeText('${g.code}').catch(()=>{});this.textContent='✅';setTimeout(()=>this.textContent='📋 Copy',1500)">📋 Copy</button>
+      </div>
+      <div class="chat-msgs" id="chat-msgs"><div class="empty" style="padding:20px">Say something! ⚽🔥</div></div>
+      <div class="chat-inp-row">
+        <input class="chat-inp" id="chat-inp" placeholder="Chat here... any language!" maxlength="300" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}">
+        <button class="chat-send" onclick="sendMsg()">Send</button>
+      </div>
+    </div>`;
+  listenChat(g.code);
+}
+function listenChat(code){
+  if(!db){document.getElementById("chat-msgs").innerHTML=`<div class="empty" style="padding:20px;font-size:12px">⚠️ Connect Firebase (banner above) for live chat!</div>`;return;}
+  if(chatRef)chatRef.off("value");
+  chatRef=db.ref("chats/"+code).orderByChild("ts").limitToLast(80).on("value",snap=>{
+    const msgs=[];snap.forEach(c=>msgs.push(c.val()));
+    const el=document.getElementById("chat-msgs");if(!el)return;
+    if(!msgs.length){el.innerHTML='<div class="empty" style="padding:20px">No messages yet! Say hi 👋</div>';return;}
+    el.innerHTML=msgs.map(msg=>{
+      const mine=msg.uid===ME.id;
+      return`<div style="display:flex;flex-direction:column;align-items:${mine?"flex-end":"flex-start"}">
+        ${!mine?`<div style="font-size:10px;color:var(--muted);margin-bottom:2px;padding:0 4px">${msg.av||"🦁"} ${msg.name}</div>`:""}
+        <div class="msg ${mine?"mine":"theirs"}">${msg.text}<div class="msg-time">${ago(msg.ts)}</div></div>
+      </div>`;
+    }).join("");
+    el.scrollTop=el.scrollHeight;
+  });
+}
+function sendMsg(){
+  const inp=document.getElementById("chat-inp");const txt=inp?.value.trim();if(!txt||!activeGrpId)return;
+  const groups=LS.groups();const g=groups.find(x=>x.id===activeGrpId);if(!g)return;
+  inp.value="";
+  if(db)db.ref("chats/"+g.code).push({uid:ME.id,name:ME.name,av:ME.av,text:txt,ts:Date.now()});
+}
+
+// ═══ WATCH TIMES ══════════════════════════════════════════════════════════════
+function updateTZ(){
+  const now=new Date();
+  const fmt=(tz)=>new Intl.DateTimeFormat('en',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:tz}).format(now);
+  document.getElementById("tz-you").textContent=fmt(userTZ);
+  document.getElementById("tz0").textContent=fmt("Asia/Kolkata");
+  document.getElementById("tz1").textContent=fmt("America/New_York");
+  document.getElementById("tz2").textContent=fmt("Europe/London");
+  document.getElementById("tz3").textContent=fmt("Asia/Dubai");
+  document.getElementById("tz4").textContent=fmt("Australia/Sydney");
+}
+function renderWatchUpcoming(){
+  const upcoming=MATCHES.filter(m=>m.s==="scheduled"&&!m.h.includes("winner")&&!m.h.includes("loser"));
+  const el=document.getElementById("watch-upcoming");
+  el.innerHTML=upcoming.slice(0,8).map(m=>{
+    const localTime=fmtMatchTime(m.ko);
+    const istTime=new Intl.DateTimeFormat('en',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:"Asia/Kolkata",month:'short',day:'numeric'}).format(new Date(m.ko));
+    const a=alerts[m.id];
+    const isUp=new Date(m.ko).getTime()-Date.now()<3*60*60*1000;
+    return`<div class="${isUp?"upnext":""}mitem" style="margin-bottom:6px">
+      <div class="mitem-row">
+        <div><div class="mteams">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">${m.stage} · ${m.venue.split(",")[0]}</div></div>
+        <button onclick="toggleAlert('${m.id}',this)" style="font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid ${a?"var(--gold)":"var(--bs)"};background:${a?"var(--gp)":"transparent"};color:${a?"var(--gold)":"var(--muted)"};cursor:pointer;white-space:nowrap">
+          ${a?"🔔 Set":"Alert"}</button>
+      </div>
+      <div class="mdate">
+        <span style="color:var(--gold)">${localTime}</span> your time
+        ${userTZ!=="Asia/Kolkata"?`<span style="color:var(--muted)"> · ${istTime} IST</span>`:""}
+      </div>
+    </div>`;
+  }).join("")||'<div class="mt">No upcoming matches</div>';
+}
+function toggleAlert(mid,btn){
+  if(alerts[mid]){delete alerts[mid];btn.textContent="Alert";}
+  else{alerts[mid]=true;btn.textContent="🔔 Set";}
+  localStorage.setItem("fh_alerts",JSON.stringify(alerts));
+  renderWatchUpcoming();
+}
+
+// ═══ LEADERBOARD ══════════════════════════════════════════════════════════════
+function renderLB(){
+  const preds=LS.preds();const lb=LS.lb();
+  MATCHES.filter(m=>m.s==="finished").forEach(m=>{
+    const aw=m.hs>m.as?"home":m.as>m.hs?"away":"draw";
+    Object.keys(preds).filter(k=>k.endsWith("_"+m.id)&&!preds[k].scored).forEach(k=>{
+      const p=preds[k];const sid=k.replace("_"+m.id,"");
+      let pts=0;if(p.winner===aw)pts+=100;if(p.hs===m.hs&&p.as===m.as)pts+=200;
+      if(pts>0){if(!lb[sid])lb[sid]={name:ME.id===sid?ME.name:"Fan",pts:0,res:0,sc:0};lb[sid].pts+=pts;if(p.winner===aw)lb[sid].res++;if(p.hs===m.hs&&p.as===m.as)lb[sid].sc++;}
+      preds[k].scored=true;
+    });
+  });
+  LS.savePreds(preds);LS.saveLB(lb);
+  const sorted=Object.entries(lb).sort((a,b)=>b[1].pts-a[1].pts);
+  const el=document.getElementById("lb-list");
+  el.innerHTML=sorted.length?sorted.map(([sid,d],i)=>`
+    <div class="lbrow ${sid===ME.id?"lbyou":""}">
+      <span class="lbrank">${i===0?"🥇":i===1?"🥈":i===2?"🥉":i+1}</span>
+      <span class="lbname">${d.name}${sid===ME.id?" (you)":""}</span>
+      <span class="lbpts">${d.pts} pts</span>
+    </div>`).join(""):'<div class="mt">Make predictions to earn points!</div>';
+  const me=lb[ME.id];
+  if(me){document.getElementById("my-pts").textContent=me.pts;document.getElementById("my-res").textContent=me.res;document.getElementById("my-sc").textContent=me.sc;}
+}
+
+// ═══ TABS ═════════════════════════════════════════════════════════════════════
+function switchTab(btn){
+  const id=btn.dataset.tab;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("tab-"+id).classList.add("active");
+  if(id==="board")renderLB();
+  if(id==="rant")renderRants();
+  if(id==="squad")renderGroups();
+  if(id==="watch")renderWatchUpcoming();
+}
+function switchTabById(id){const btn=document.querySelector(`.tab[data-tab="${id}"]`);if(btn)switchTab(btn);}
+
+// ═══ BOOT ═════════════════════════════════════════════════════════════════════
+if(ME){document.getElementById("onboard").style.display="none";bootApp();}
+</script>
+</body>
+</html>
