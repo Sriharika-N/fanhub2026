@@ -1,0 +1,7 @@
+{
+  "name": "fanhub-2026-backend",
+  "version": "1.0.0",
+  "dependencies": {
+    "ably": "^2.0.0"
+  }
+}
