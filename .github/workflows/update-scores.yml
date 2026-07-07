@@ -1,0 +1,56 @@
+name: Update World Cup Scores
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch scores
+        env:
+          WC_API_KEY: ${{ secrets.WC_API_KEY }}
+        run: |
+          curl -s -H "Authorization: Bearer $WC_API_KEY" \
+            "https://api.wc2026api.com/matches" -o raw.json || echo "[]" > raw.json
+
+          node -e "
+          const fs = require('fs');
+          let matches = [];
+          try { matches = JSON.parse(fs.readFileSync('raw.json','utf8')); } catch(e) {}
+          if (!Array.isArray(matches)) matches = [];
+          const out = {
+            fetchedAt: new Date().toISOString(),
+            matches: matches.map(m => ({
+              id: String(m.id || ''),
+              matchNumber: m.match_number || null,
+              home: m.home_team || '',
+              away: m.away_team || '',
+              homeScore: m.home_score ?? null,
+              awayScore: m.away_score ?? null,
+              status: m.status || 'scheduled',
+              phase: m.phase || 'PRE',
+              minute: m.minute || null,
+              round: m.round || '',
+              kickoff: m.kickoff_utc || '',
+              stadium: m.stadium || ''
+            }))
+          };
+          fs.writeFileSync('scores.json', JSON.stringify(out));
+          console.log(out.matches.length + ' matches written');
+          "
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scores.json
+          git diff --staged --quiet && echo "No changes" || \
+            (git commit -m "⚽ scores $(date -u '+%H:%M UTC')" && git push)
