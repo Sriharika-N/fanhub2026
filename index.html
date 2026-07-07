@@ -57,9 +57,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .u-pill{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:20px;background:var(--bg2);border:1px solid var(--gb);font-size:12px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:36px}
 .u-pill:active{border-color:var(--gold);background:var(--gf);transform:scale(.97)}
 
-/* ── ABLY BANNER ── */
-#ab-banner{display:none;}
-
 /* ── TABS ── */
 .tabs-bar{background:rgba(6,13,24,.9);backdrop-filter:blur(10px);position:sticky;top:49px;z-index:99;border-bottom:1px solid var(--b)}
 .tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 10px}
@@ -216,6 +213,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
+<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -240,10 +238,11 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
-    <div class="PM-cur" id="pm-cur-av">🦁</div>
+    <div class="pm-cur" id="pm-cur-av">🦁</div>
     <div class="pm-name" id="pm-cur-name">Loading...</div>
     <div class="avs" id="pm-avs">
       <div class="av sel" data-v="🦁" onclick="pickAvPM(this)">🦁</div>
@@ -265,6 +264,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
   <div class="hdr-r">
@@ -278,6 +278,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -290,6 +291,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
+<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -303,9 +305,10 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
+  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
-    <span id="lr-sync-txt">Connecting to secure fan database...</span>
+    <span id="lr-sync-txt">Syncing with real-time global stadium feed...</span>
   </div>
 
   <div class="composer">
@@ -328,10 +331,11 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
+<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
-    <span id="r-sync-txt">Connecting to global fan database...</span>
+    <span id="r-sync-txt">Connected with global fan network...</span>
   </div>
   <div class="composer">
     <div class="comp-top">
@@ -365,6 +369,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
+<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -382,6 +387,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
+<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -390,6 +396,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:10px"><div class="card empty">Select an upcoming match above</div></div>
 </div>
 
+<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -417,24 +424,29 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-</div><script>
+</div><!-- /root -->
+
+<script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
 let ME = JSON.parse(localStorage.getItem("fh_me")||"null");
+
+// 💥 ZERO BACKEND REPLACEMENT: PASTE YOUR RESTRICTED APP KEY RIGHT HERE
+let AK = "PEa0HQ.KUlYQQ:FlbQkZXoSdwz1u9TAvo8zDwr9JHyFFteCY__HDrS7DI";
+
 let ablyRT = null;
-let chLive = null;   // "fh-live-v2"  — live tab reactions
-let chRants = null;  // "fh-rants-v2" — global rants tab
+let chLive = null;   
+let chRants = null;  
 let connected = false;
 
-// In-memory stores (source of truth = Ably channel history; localStorage = cache)
 let liveRants = [];
 let rants = [];
 
 let moods = {l:"😡 Furious", r:"😡 Furious"};
 let rantFilter = "all";
 let selMid = null, selPMid = null, selW = null;
-let pmAv = "🦁"; // for profile modal
+let pmAv = "🦁"; 
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
@@ -443,7 +455,7 @@ const REACTS=["🔥","😂","💯","😭","👏","❤️","⚽","🤣"];
 const EI={goal:"⚽",yellow_card:"🟨",red_card:"🟥",penalty:"🎯",own_goal:"😬"};
 
 // ════════════════════════════════════════════════════════════
-// FIFA 2026 DATA — verified July 7, 2026
+// FIFA 2026 DATA
 // ════════════════════════════════════════════════════════════
 const MS=[
 {id:"r32a",h:"Canada",a:"South Africa",hf:"🇨🇦",af:"🇿🇦",hs:1,as:0,stage:"Round of 32",v:"BC Place, Vancouver",ko:"2026-06-28T23:00:00Z",s:"finished",ev:[{m:92,t:"goal",si:"home",p:"Eustaquio — 92' winner!"}]},
@@ -453,7 +465,7 @@ const MS=[
 {id:"r32e",h:"Norway",a:"Ivory Coast",hf:"🇳🇴",af:"🇨🇮",hs:2,as:1,stage:"Round of 32",v:"Gillette Stadium, Boston",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:34,t:"goal",si:"home",p:"Haaland"},{m:71,t:"goal",si:"home",p:"Ødegaard"},{m:85,t:"goal",si:"away",p:"A. Diallo"}]},
 {id:"r32f",h:"France",a:"Sweden",hf:"🇫🇷",af:"🇸🇪",hs:3,as:0,stage:"Round of 32",v:"Lincoln Financial, Philadelphia",ko:"2026-06-30T23:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"home",p:"Mbappé"},{m:38,t:"goal",si:"home",p:"Dembélé"},{m:72,t:"goal",si:"home",p:"Griezmann"}]},
 {id:"r32g",h:"Mexico",a:"Ecuador",hf:"🇲🇽",af:"🇪🇨",hs:2,as:0,stage:"Round of 32",v:"Estadio Azteca, Mexico City",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:28,t:"goal",si:"home",p:"Jiménez"},{m:66,t:"goal",si:"home",p:"Quiñones"}]},
-{id:"r32h",h:"England",a:"DR Congo",hf:"🏴󠁧󠁢󠁥󠁮󠁿",af:"🇨🇩",hs:2,as:1,stage:"Round of 32",v:"Mercedes-Benz, Atlanta",ko:"2026-07-01T21:00:00Z",s:"finished",ev:[{m:7,t:"goal",si:"away",p:"Cipenga"},{m:75,t:"goal",si:"home",p:"Kane"},{m:86,t:"goal",si:"home",p:"Kane — brace seals it"}]},
+{id:"r32h",h:"England",a:"DR Congo",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇨🇩",hs:2,as:1,stage:"Round of 32",v:"Mercedes-Benz, Atlanta",ko:"2026-07-01T21:00:00Z",s:"finished",ev:[{m:7,t:"goal",si:"away",p:"Cipenga"},{m:75,t:"goal",si:"home",p:"Kane"},{m:86,t:"goal",si:"home",p:"Kane — brace seals it"}]},
 {id:"r32i",h:"Belgium",a:"Senegal",hf:"🇧🇪",af:"🇸🇳",hs:3,as:2,stage:"Round of 32",v:"Lumen Field, Seattle",ko:"2026-07-01T01:00:00Z",s:"finished",ev:[{m:25,t:"goal",si:"away",p:"Diarra"},{m:51,t:"goal",si:"away",p:"Sarr"},{m:86,t:"goal",si:"home",p:"Lukaku"},{m:89,t:"goal",si:"home",p:"Tielemans"},{m:125,t:"penalty",si:"home",p:"Tielemans (pen) — Belgium 3-2 aet"}]},
 {id:"r32j",h:"USA",a:"Bosnia & Herz.",hf:"🇺🇸",af:"🇧🇦",hs:2,as:0,stage:"Round of 32",v:"Lumen Field, Seattle",ko:"2026-07-01T23:00:00Z",s:"finished",ev:[{m:45,t:"goal",si:"home",p:"Balogun"},{m:82,t:"goal",si:"home",p:"Tillman"}]},
 {id:"r32k",h:"Spain",a:"Austria",hf:"🇪🇸",af:"🇦🇹",hs:3,as:0,stage:"Round of 32",v:"SoFi Stadium, Los Angeles",ko:"2026-07-02T21:00:00Z",s:"finished",ev:[{m:3,t:"goal",si:"home",p:"Oyarzabal"},{m:66,t:"goal",si:"home",p:"Porro"},{m:89,t:"goal",si:"home",p:"Oyarzabal"}]},
@@ -480,9 +492,6 @@ const MS=[
 {id:"fin",h:"SF winner 1",a:"SF winner 2",hf:"🏳",af:"🏳",hs:null,as:null,stage:"🏆 Final",v:"MetLife Stadium, New York",ko:"2026-07-19T19:00:00Z",s:"scheduled",ev:[]}
 ];
 
-// ════════════════════════════════════════════════════════════
-// LOCAL STORAGE
-// ════════════════════════════════════════════════════════════
 const LS={
   preds:()=>JSON.parse(localStorage.getItem("fh_preds")||"{}"),
   sp:p=>localStorage.setItem("fh_preds",JSON.stringify(p)),
@@ -493,20 +502,19 @@ const LS={
 };
 
 // ════════════════════════════════════════════════════════════
-// ABLY — SECURE AUTO-CONNECT SYSTEM
+// DIRECT SUBSCRIPTION FLOW (NO SERVERLESS REQUIRED)
 // ════════════════════════════════════════════════════════════
-function connectAbly() {
-  initAbly();
-}
-
 function initAbly(){
+  if(AK.includes("PASTE")) {
+    console.warn("Real-time key unconfigured.");
+    return;
+  }
   try{
-   // Point it directly to your Vercel server's auth route
-ablyRT = new Ably.Realtime({
-  authUrl: 'https://YOUR-VERCEL-APP-NAME.vercel.app/api/auth',
-  clientId: SID,
-  recover: true
-});
+    ablyRT = new Ably.Realtime({
+      key: AK,
+      clientId: SID,
+      recover: true
+    });
 
     ablyRT.connection.on("connected", async ()=>{
       setConn(true);
@@ -514,7 +522,6 @@ ablyRT = new Ably.Realtime({
       chLive = ablyRT.channels.get("fh-live-v2", {params:{rewind:"2m"}});
       chRants = ablyRT.channels.get("fh-rants-v2", {params:{rewind:"2m"}});
 
-      // ── LIVE RANTS: subscribe + fetch last 50 from history ──
       chLive.subscribe("r", msg=>{
         const r = msg.data;
         if(!liveRants.find(x=>x.id===r.id)){
@@ -530,9 +537,8 @@ ablyRT = new Ably.Realtime({
         hist.forEach(r=>{if(!liveRants.find(x=>x.id===r.id))liveRants.push(r);});
         liveRants.sort((a,b)=>b.ts-a.ts);
         renderLiveFeed();
-      }catch(e){console.warn("Live history fetch failed:",e);}
+      }catch(e){console.warn("Feed context rewind failed:",e);}
 
-      // ── GLOBAL RANTS: subscribe + fetch last 100 from history ──
       chRants.subscribe("r", msg=>{
         const r = msg.data;
         if(!rants.find(x=>x.id===r.id)){
@@ -547,9 +553,8 @@ ablyRT = new Ably.Realtime({
         const hist = page.items.map(i=>i.data).filter(Boolean).reverse();
         hist.forEach(r=>{if(!rants.find(x=>x.id===r.id))rants.push(r);});
         rants.sort((a,b)=>b.ts-a.ts);
-        if(document.getElementById("tab-rants").classList.contains("on"))renderRants();
-        else renderRants(); 
-      }catch(e){console.warn("Rants history fetch failed:",e);}
+        renderRants();
+      }catch(e){console.warn("Global rants loop failed:",e);}
 
       updateSyncStatus();
     });
@@ -558,7 +563,7 @@ ablyRT = new Ably.Realtime({
     ablyRT.connection.on("failed",()=>{setConn(false);updateSyncStatus();});
 
   }catch(e){
-    console.error("Ably init:",e);
+    console.error("Ably core failure:",e);
     setConn(false);
   }
 }
@@ -572,8 +577,8 @@ function setConn(on){
 }
 
 function updateSyncStatus(){
-  const okTxt = `🟢 Synced with all fans in real time`;
-  const offTxt = `Connecting to real-time fan server...`;
+  const okTxt = `🟢 Stadium feed active`;
+  const offTxt = `Offline (Rants will update locally)`;
   ["lr-sync-dot","r-sync-dot"].forEach(id=>{
     const el=document.getElementById(id);if(el)el.className="sync-dot "+(connected?"ok":"off");
   });
@@ -588,7 +593,7 @@ function pub(ch, data){
 }
 
 // ════════════════════════════════════════════════════════════
-// PROFILE — change name/avatar anytime
+// INTERFACE LOGIC
 // ════════════════════════════════════════════════════════════
 let obAv="🦁";
 function pickAv(el){document.querySelectorAll("#ob-avs .av").forEach(e=>e.classList.remove("sel"));el.classList.add("sel");obAv=el.dataset.v;}
@@ -632,30 +637,24 @@ function startApp(){
   boot();
 }
 
-// ════════════════════════════════════════════════════════════
-// HELPERS
-// ════════════════════════════════════════════════════════════
 function ft(ko){return new Intl.DateTimeFormat("en",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hour12:true,timeZone:TZ}).format(new Date(ko));}
 function fto(ko){return new Intl.DateTimeFormat("en",{hour:"2-digit",minute:"2-digit",hour12:true,timeZone:TZ}).format(new Date(ko));}
 function fcd(ko){const d=new Date(ko).getTime()-Date.now();if(d<0)return"started";const h=Math.floor(d/3.6e6),m=Math.floor((d%3.6e6)/6e4);if(h>24)return Math.floor(h/24)+"d";if(h>0)return h+"h "+m+"m";return m+"m";}
 function ago(ts){const d=Math.floor((Date.now()-ts)/6e4);if(d<1)return"now";if(d<60)return d+"m";if(d<1440)return Math.floor(d/60)+"h";return Math.floor(d/1440)+"d";}
 function n24(ko){const d=new Date(ko).getTime()-Date.now();return d>0&&d<864e5;}
 function ss(m){return m.s==="scheduled"?"vs":`${m.hs??""} – ${m.as??""}`;}
+// Use 2026 date context dynamically
 function sbadge(m){if(m.s==="live")return`<span class="badge b-live">● LIVE</span>`;if(m.s==="finished")return`<span class="badge b-ft">FT</span>`;const d=new Date(m.ko).getTime()-Date.now();if(d<21600000&&d>0)return`<span class="badge b-soon">Soon</span>`;return`<span class="badge b-sched">🗓</span>`;}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function avbg(av){return AVB[av]||"rgba(59,139,212,.2)";}
+// Adaptively update container theme depending on input values
 function mCls(m){if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecstatic|Proud|fire/.test(m))return"el";if(/Heartbroken|Gutted/.test(m))return"sad";if(/Watching|LOL/.test(m))return"ch";return"";}
 
-// ════════════════════════════════════════════════════════════
-// BOOT
-// ════════════════════════════════════════════════════════════
 function boot(){
   updateUINames();
   document.getElementById("tz-lbl").textContent=TZ;
   
-  // Triggers secure background authentication instantly
-  connectAbly();
-  
+  initAbly();
   updateSyncStatus();
   renderLive();
   renderMatchList("all");
@@ -670,9 +669,6 @@ function boot(){
   startESPN(); 
 }
 
-// ════════════════════════════════════════════════════════════
-// LIVE TAB
-// ════════════════════════════════════════════════════════════
 function renderLive(){
   const live=MS.filter(m=>m.s==="live");
   const hero=live[0]||MS.filter(m=>m.s==="scheduled").sort((a,b)=>new Date(a.ko)-new Date(b.ko))[0]||MS.filter(m=>m.s==="finished").reverse()[0];
@@ -746,9 +742,6 @@ function updateDrink(){
   if(t)t.textContent=diff<3600000&&diff>0?"🚨 Kickoff soon — grab that drink!":"Grab a drink, it's matchday!";
 }
 
-// ════════════════════════════════════════════════════════════
-// LIVE FEED (Live tab rants)
-// ════════════════════════════════════════════════════════════
 function setM(type,val,btn){
   moods[type]=val;
   const id=type==="l"?"lc-moods":"rc-moods";
@@ -764,11 +757,7 @@ function postLive(){
   
   liveRants.unshift(r);
   renderLiveFeed();
-  
-  const published = pub(chLive, r);
-  if(!published && !connected){
-    // offline backup protocol
-  }
+  pub(chLive, r);
   document.getElementById("lc-txt").value="";
 }
 
@@ -779,9 +768,6 @@ function renderLiveFeed(){
   el.innerHTML=liveRants.slice(0,30).map(r=>rCard(r)).join("");
 }
 
-// ════════════════════════════════════════════════════════════
-// RANT CARD
-// ════════════════════════════════════════════════════════════
 function rCard(r){
   const myR=LS.rx();
   const rid="r_"+r.id;
@@ -816,9 +802,6 @@ function rxRant(e,rid,emoji,wasOn,rantId){
   renderRants();
 }
 
-// ════════════════════════════════════════════════════════════
-// RANTS TAB
-// ════════════════════════════════════════════════════════════
 function fillSelects(){
   const sorted=[
     ...MS.filter(m=>m.s==="live"),
@@ -844,7 +827,6 @@ function postRant(){
   document.getElementById("cc").textContent="0";
 }
 
-//
 function renderRants(){
   let list=[...rants];
   if(rantFilter==="mine")list=rants.filter(r=>r.uid===ME.id);
@@ -861,9 +843,6 @@ function setRF(f,btn){
   renderRants();
 }
 
-// ════════════════════════════════════════════════════════════
-// MATCHES
-// ════════════════════════════════════════════════════════════
 function renderMatchList(f){
   let ms=[...MS].reverse();
   if(f==="live")ms=MS.filter(m=>m.s==="live");
@@ -878,9 +857,6 @@ function renderMatchList(f){
 }
 function filterM(f,btn){document.querySelectorAll("#tab-matches .fc").forEach(b=>b.classList.remove("on"));btn.classList.add("on");renderMatchList(f);}
 
-// ════════════════════════════════════════════════════════════
-// PREDICT
-// ════════════════════════════════════════════════════════════
 function renderGPList(){
   const up=MS.filter(m=>m.s==="scheduled"&&!["winner","loser","SF ","TBD"].some(x=>m.h.includes(x))).slice(0,5);
   const p=LS.preds();
@@ -894,7 +870,7 @@ function renderGPList(){
       <div style="font-size:11px;color:var(--muted);margin-bottom:7px">${ft(m.ko)}</div>
       ${all.length?`<div class="pb-bar"><div class="pb-h" style="flex:${hp}"></div><div class="pb-d" style="flex:${dp}"></div><div class="pb-a" style="flex:${ap}"></div></div>
         <div class="pb-lbl" style="font-size:11px;margin-top:5px"><span>${m.h} <strong>${hp}%</strong></span><span>Draw <strong>${dp}%</strong></span><span>${m.a} <strong>${ap}%</strong></span></div>`
-        :`<div style="font-size:11px;color:var(--muted)">No predictions yet — be first!</div>`}
+        :`<div style="font-size:11px;color:var(--muted)">No predictions yet ─ be first!</div>`}
     </div>`;
   }).join("")||'<div class="mt">No upcoming matches</div>';
 }
@@ -959,9 +935,6 @@ function subPred(mid){
   LS.sp(p);setTimeout(()=>{selP(mid);renderGPList();renderPB(MS.find(x=>x.id===selMid)||MS[0]);},800);
 }
 
-// ════════════════════════════════════════════════════════════
-// LEADERBOARD
-// ════════════════════════════════════════════════════════════
 function renderLB(){
   const p=LS.preds(),lb=LS.lb();
   MS.filter(m=>m.s==="finished").forEach(m=>{
@@ -987,9 +960,6 @@ function renderLB(){
   document.getElementById("my-rank").textContent=rank>=0?"#"+(rank+1):"#—";
 }
 
-// ════════════════════════════════════════════════════════════
-// TZ + TABS
-// ════════════════════════════════════════════════════════════
 function updateTZ(){
   [["tz-you",TZ],["tz0","Asia/Kolkata"],["tz1","America/New_York"],["tz2","Europe/London"],["tz3","Asia/Dubai"],["tz4","Australia/Sydney"]].forEach(([id,tz])=>{
     const e=document.getElementById(id);
@@ -1009,7 +979,7 @@ function switchTab(btn){
 function switchTabById(id){const b=document.querySelector(`.tab[data-tab="${id}"]`);if(b)switchTab(b);}
 
 // ════════════════════════════════════════════════════════════
-// ESPN LIVE SCORES — free, no key, no CORS issues
+// LIVE ENDPOINT PARSER FOR REAL TIME STATUS
 // ════════════════════════════════════════════════════════════
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
 
@@ -1078,7 +1048,7 @@ async function fetchESPN(){
     }
 
   }catch(e){
-    console.warn("ESPN fetch failed:",e);
+    console.warn("ESPN tracking disconnected:",e);
   }
 }
 
@@ -1087,7 +1057,6 @@ function startESPN(){
   setInterval(fetchESPN, 60000);
 }
 
-// BOOT SYSTEM CHECK
 if(ME){document.getElementById("ob").style.display="none";boot();}
 </script>
 </body>
