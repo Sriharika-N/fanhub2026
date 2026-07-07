@@ -58,14 +58,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .u-pill:active{border-color:var(--gold);background:var(--gf);transform:scale(.97)}
 
 /* ── ABLY BANNER ── */
-#ab-banner{background:rgba(212,175,55,.07);border:1px solid var(--gb);border-radius:var(--r);padding:12px 14px;margin:10px 16px;font-size:12px}
-#ab-banner strong{color:var(--gold);font-size:13px;display:block;margin-bottom:5px}
-#ab-banner p{color:var(--muted);line-height:1.65;margin-bottom:8px}
-.ab-row{display:flex;gap:8px;flex-wrap:wrap}
-.ab-i{flex:1;min-width:170px;padding:8px 10px;font-size:12px;background:var(--bg);border:1px solid var(--bs);border-radius:8px;color:var(--text);font-family:inherit}
-.ab-i:focus{outline:none;border-color:var(--gold)}
-.ab-btn{padding:8px 14px;background:var(--gold);color:#060d18;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.ab-skip{padding:8px 12px;background:transparent;color:var(--muted);border:1px solid var(--bs);border-radius:8px;font-size:12px;cursor:pointer;white-space:nowrap}
+#ab-banner{display:none;}
 
 /* ── TABS ── */
 .tabs-bar{background:rgba(6,13,24,.9);backdrop-filter:blur(10px);position:sticky;top:49px;z-index:99;border-bottom:1px solid var(--b)}
@@ -223,7 +216,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
-<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -248,11 +240,10 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
-    <div class="pm-cur" id="pm-cur-av">🦁</div>
+    <div class="PM-cur" id="pm-cur-av">🦁</div>
     <div class="pm-name" id="pm-cur-name">Loading...</div>
     <div class="avs" id="pm-avs">
       <div class="av sel" data-v="🦁" onclick="pickAvPM(this)">🦁</div>
@@ -274,7 +265,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
   <div class="hdr-r">
@@ -288,9 +278,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ABLY BANNER (Hidden because we now use Vercel Auto-Auth!) -->
-<div id="ab-banner" style="display: none;"></div>
-<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -303,7 +290,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
-<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -317,10 +303,9 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
-  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
-    <span id="lr-sync-txt">Connect Ably above to sync rants with all fans in real time</span>
+    <span id="lr-sync-txt">Connecting to secure fan database...</span>
   </div>
 
   <div class="composer">
@@ -343,11 +328,10 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
-<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
-    <span id="r-sync-txt">Connect Ably above to sync rants with all fans globally</span>
+    <span id="r-sync-txt">Connecting to global fan database...</span>
   </div>
   <div class="composer">
     <div class="comp-top">
@@ -381,7 +365,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
-<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -399,7 +382,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
-<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -408,7 +390,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:10px"><div class="card empty">Select an upcoming match above</div></div>
 </div>
 
-<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -436,14 +417,11 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-</div><!-- /root -->
-
-<script>
+</div><script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
 let ME = JSON.parse(localStorage.getItem("fh_me")||"null");
-let AK = localStorage.getItem("fh_ak")||"";
 let ablyRT = null;
 let chLive = null;   // "fh-live-v2"  — live tab reactions
 let chRants = null;  // "fh-rants-v2" — global rants tab
@@ -475,7 +453,7 @@ const MS=[
 {id:"r32e",h:"Norway",a:"Ivory Coast",hf:"🇳🇴",af:"🇨🇮",hs:2,as:1,stage:"Round of 32",v:"Gillette Stadium, Boston",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:34,t:"goal",si:"home",p:"Haaland"},{m:71,t:"goal",si:"home",p:"Ødegaard"},{m:85,t:"goal",si:"away",p:"A. Diallo"}]},
 {id:"r32f",h:"France",a:"Sweden",hf:"🇫🇷",af:"🇸🇪",hs:3,as:0,stage:"Round of 32",v:"Lincoln Financial, Philadelphia",ko:"2026-06-30T23:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"home",p:"Mbappé"},{m:38,t:"goal",si:"home",p:"Dembélé"},{m:72,t:"goal",si:"home",p:"Griezmann"}]},
 {id:"r32g",h:"Mexico",a:"Ecuador",hf:"🇲🇽",af:"🇪🇨",hs:2,as:0,stage:"Round of 32",v:"Estadio Azteca, Mexico City",ko:"2026-06-30T21:00:00Z",s:"finished",ev:[{m:28,t:"goal",si:"home",p:"Jiménez"},{m:66,t:"goal",si:"home",p:"Quiñones"}]},
-{id:"r32h",h:"England",a:"DR Congo",hf:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",af:"🇨🇩",hs:2,as:1,stage:"Round of 32",v:"Mercedes-Benz, Atlanta",ko:"2026-07-01T21:00:00Z",s:"finished",ev:[{m:7,t:"goal",si:"away",p:"Cipenga"},{m:75,t:"goal",si:"home",p:"Kane"},{m:86,t:"goal",si:"home",p:"Kane — brace seals it"}]},
+{id:"r32h",h:"England",a:"DR Congo",hf:"🏴󠁧󠁢󠁥󠁮󠁿",af:"🇨🇩",hs:2,as:1,stage:"Round of 32",v:"Mercedes-Benz, Atlanta",ko:"2026-07-01T21:00:00Z",s:"finished",ev:[{m:7,t:"goal",si:"away",p:"Cipenga"},{m:75,t:"goal",si:"home",p:"Kane"},{m:86,t:"goal",si:"home",p:"Kane — brace seals it"}]},
 {id:"r32i",h:"Belgium",a:"Senegal",hf:"🇧🇪",af:"🇸🇳",hs:3,as:2,stage:"Round of 32",v:"Lumen Field, Seattle",ko:"2026-07-01T01:00:00Z",s:"finished",ev:[{m:25,t:"goal",si:"away",p:"Diarra"},{m:51,t:"goal",si:"away",p:"Sarr"},{m:86,t:"goal",si:"home",p:"Lukaku"},{m:89,t:"goal",si:"home",p:"Tielemans"},{m:125,t:"penalty",si:"home",p:"Tielemans (pen) — Belgium 3-2 aet"}]},
 {id:"r32j",h:"USA",a:"Bosnia & Herz.",hf:"🇺🇸",af:"🇧🇦",hs:2,as:0,stage:"Round of 32",v:"Lumen Field, Seattle",ko:"2026-07-01T23:00:00Z",s:"finished",ev:[{m:45,t:"goal",si:"home",p:"Balogun"},{m:82,t:"goal",si:"home",p:"Tillman"}]},
 {id:"r32k",h:"Spain",a:"Austria",hf:"🇪🇸",af:"🇦🇹",hs:3,as:0,stage:"Round of 32",v:"SoFi Stadium, Los Angeles",ko:"2026-07-02T21:00:00Z",s:"finished",ev:[{m:3,t:"goal",si:"home",p:"Oyarzabal"},{m:66,t:"goal",si:"home",p:"Porro"},{m:89,t:"goal",si:"home",p:"Oyarzabal"}]},
@@ -515,46 +493,24 @@ const LS={
 };
 
 // ════════════════════════════════════════════════════════════
-// ABLY — THE FIX: proper subscribe + history fetch on connect
+// ABLY — SECURE AUTO-CONNECT SYSTEM
 // ════════════════════════════════════════════════════════════
-// Change it to this:
 function connectAbly() {
-    // Connects automatically using our secure backend route!
-    window.ably = new Ably.Realtime({ authUrl: '/api/auth' });
-    
-    const channel = window.ably.channels.get('global-rants');
-    
-    window.ably.connection.on('connected', () => {
-        console.log("Connected to Ably securely!");
-        // If your code turns a status dot green or updates the UI, keep that here
-    });
-}
-
-// Make sure to call it automatically when the page loads!
-window.addEventListener('DOMContentLoaded', () => {
-    connectAbly();
-});
-}
-function skipAbly(){
-  document.getElementById("ab-banner").style.display="none";
-  localStorage.setItem("fh_ab_skip","1");
+  initAbly();
 }
 
 function initAbly(){
-  if(!AK)return;
-  document.getElementById("ab-banner").style.display="none";
   try{
+    // Auto-connect to your Vercel auth endpoint safely
     ablyRT = new Ably.Realtime({
-      key: AK,
+      authUrl: '/api/auth',
       clientId: SID,
-      // Enable channel history so late joiners get past messages
       recover: true
     });
 
     ablyRT.connection.on("connected", async ()=>{
       setConn(true);
 
-      // Get channels with persistence enabled (so history works)
       chLive = ablyRT.channels.get("fh-live-v2", {params:{rewind:"2m"}});
       chRants = ablyRT.channels.get("fh-rants-v2", {params:{rewind:"2m"}});
 
@@ -567,7 +523,7 @@ function initAbly(){
           updateSyncStatus();
         }
       });
-      // Fetch history to populate for this session
+      
       try{
         const page = await chLive.history({limit:50, direction:"backwards"});
         const hist = page.items.map(i=>i.data).filter(Boolean).reverse();
@@ -585,13 +541,14 @@ function initAbly(){
           updateSyncStatus();
         }
       });
+      
       try{
         const page = await chRants.history({limit:100, direction:"backwards"});
         const hist = page.items.map(i=>i.data).filter(Boolean).reverse();
         hist.forEach(r=>{if(!rants.find(x=>x.id===r.id))rants.push(r);});
         rants.sort((a,b)=>b.ts-a.ts);
         if(document.getElementById("tab-rants").classList.contains("on"))renderRants();
-        else renderRants(); // preload
+        else renderRants(); 
       }catch(e){console.warn("Rants history fetch failed:",e);}
 
       updateSyncStatus();
@@ -603,7 +560,6 @@ function initAbly(){
   }catch(e){
     console.error("Ably init:",e);
     setConn(false);
-    alert("Ably connection failed. Check your API key and try again.");
   }
 }
 
@@ -617,7 +573,7 @@ function setConn(on){
 
 function updateSyncStatus(){
   const okTxt = `🟢 Synced with all fans in real time`;
-  const offTxt = `Connect Ably above to sync rants with all fans`;
+  const offTxt = `Connecting to real-time fan server...`;
   ["lr-sync-dot","r-sync-dot"].forEach(id=>{
     const el=document.getElementById(id);if(el)el.className="sync-dot "+(connected?"ok":"off");
   });
@@ -696,8 +652,10 @@ function mCls(m){if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecst
 function boot(){
   updateUINames();
   document.getElementById("tz-lbl").textContent=TZ;
-  if(AK){document.getElementById("ak-i").value=AK;initAbly();}
-  else if(localStorage.getItem("fh_ab_skip"))document.getElementById("ab-banner").style.display="none";
+  
+  // Triggers secure background authentication instantly
+  connectAbly();
+  
   updateSyncStatus();
   renderLive();
   renderMatchList("all");
@@ -709,7 +667,7 @@ function boot(){
   renderLB();
   updateTZ();setInterval(updateTZ,1000);
   setInterval(()=>{renderNext24();updateDrink();},30000);
-  startESPN(); // free ESPN live scores, no key needed
+  startESPN(); 
 }
 
 // ════════════════════════════════════════════════════════════
@@ -803,13 +761,13 @@ function postLive(){
   if(!txt)return;
   const m=MS.find(x=>x.id===selMid)||MS.filter(x=>x.s==="finished").reverse()[0];
   const r={id:"l"+Date.now()+Math.random().toString(36).slice(2,5),uid:ME.id,name:ME.name,av:ME.av,text:txt,mood:moods.l,mid:m?.id||"",mlabel:m?`${m.hf} ${m.h} vs ${m.af} ${m.a}`:"General",ts:Date.now(),reactions:{}};
-  // Always add locally first for instant feedback
+  
   liveRants.unshift(r);
   renderLiveFeed();
-  // Then publish — other fans will receive via subscribe callback
+  
   const published = pub(chLive, r);
   if(!published && !connected){
-    // offline — already in local array, nothing else to do
+    // offline backup protocol
   }
   document.getElementById("lc-txt").value="";
 }
@@ -886,6 +844,7 @@ function postRant(){
   document.getElementById("cc").textContent="0";
 }
 
+//
 function renderRants(){
   let list=[...rants];
   if(rantFilter==="mine")list=rants.filter(r=>r.uid===ME.id);
@@ -910,7 +869,7 @@ function renderMatchList(f){
   if(f==="live")ms=MS.filter(m=>m.s==="live");
   else if(f==="finished")ms=[...MS].filter(m=>m.s==="finished").reverse();
   else if(f==="scheduled")ms=MS.filter(m=>m.s==="scheduled");
-  else if(f!=="all")ms=[...MS].filter(m=>m.stage&&m.stage.includes(f)).reverse();
+  else if(f!="all")ms=[...MS].filter(m=>m.stage&&m.stage.includes(f)).reverse();
   document.getElementById("m-list").innerHTML=ms.map(m=>`
     <div class="mi" onclick="selHero('${m.id}');switchTabById('live')">
       <div class="mi-row"><div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div><div style="text-align:right"><span class="mi-s">${ss(m)}</span>${sbadge(m)}</div></div>
@@ -1051,8 +1010,6 @@ function switchTabById(id){const b=document.querySelector(`.tab[data-tab="${id}"
 
 // ════════════════════════════════════════════════════════════
 // ESPN LIVE SCORES — free, no key, no CORS issues
-// Endpoint: site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard
-// Updates every 60s. About 1-2 min behind live. 100% free.
 // ════════════════════════════════════════════════════════════
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
 
@@ -1082,14 +1039,11 @@ async function fetchESPN(){
       const homeScore = parseInt(homeComp.score)||0;
       const awayScore = parseInt(awayComp.score)||0;
       const statusType = comp.status?.type?.name||"";
-      const statusDesc = comp.status?.type?.description||"";
       const clock = comp.status?.displayClock||"";
 
-      // Find matching local match by team name fuzzy match
       const local = MS.find(m=>{
         const hn = m.h.toLowerCase(), an = m.a.toLowerCase();
         const ln = homeName.toLowerCase(), rn = awayName.toLowerCase();
-        // match if first word of either team name matches
         return (ln.split(" ")[0].length>2 && hn.includes(ln.split(" ")[0])) ||
                (hn.split(" ")[0].length>2 && ln.includes(hn.split(" ")[0]));
       });
@@ -1097,7 +1051,6 @@ async function fetchESPN(){
 
       const prevS = local.s, prevH = local.hs, prevA = local.as;
 
-      // Map ESPN status to our status
       if(statusType==="STATUS_IN_PROGRESS"||statusType==="STATUS_HALFTIME"){
         local.s = "live";
         local.minute = clock;
@@ -1107,7 +1060,6 @@ async function fetchESPN(){
         local.s = "scheduled";
       }
 
-      // Update scores only if match has started
       if(local.s!=="scheduled"){
         local.hs = homeScore;
         local.as = awayScore;
@@ -1116,7 +1068,6 @@ async function fetchESPN(){
       if(prevS!==local.s||prevH!==local.hs||prevA!==local.as) anyChange=true;
     });
 
-    // Update the "last updated" indicator
     const el = document.getElementById("espn-ts");
     if(el) el.textContent = "⚡ Live · "+new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
 
@@ -1136,7 +1087,7 @@ function startESPN(){
   setInterval(fetchESPN, 60000);
 }
 
-// BOOT
+// BOOT SYSTEM CHECK
 if(ME){document.getElementById("ob").style.display="none";boot();}
 </script>
 </body>
