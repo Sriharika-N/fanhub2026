@@ -517,10 +517,23 @@ const LS={
 // ════════════════════════════════════════════════════════════
 // ABLY — THE FIX: proper subscribe + history fetch on connect
 // ════════════════════════════════════════════════════════════
-function connectAbly(){
-  const k=document.getElementById("ak-i").value.trim();
-  if(!k){alert("Paste your Ably API key first");return;}
-  AK=k; localStorage.setItem("fh_ak",k); initAbly();
+// Change it to this:
+function connectAbly() {
+    // Connects automatically using our secure backend route!
+    window.ably = new Ably.Realtime({ authUrl: '/api/auth' });
+    
+    const channel = window.ably.channels.get('global-rants');
+    
+    window.ably.connection.on('connected', () => {
+        console.log("Connected to Ably securely!");
+        // If your code turns a status dot green or updates the UI, keep that here
+    });
+}
+
+// Make sure to call it automatically when the page loads!
+window.addEventListener('DOMContentLoaded', () => {
+    connectAbly();
+});
 }
 function skipAbly(){
   document.getElementById("ab-banner").style.display="none";
