@@ -667,11 +667,14 @@ function renderNext24(){
 
 function renderPMList(){
   const up = MS.filter(m => getTrueStatus(m) === "scheduled");
-  document.getElementById("pm-list").innerHTML=up.map(m=>`
+  document.getElementById("pm-list").innerHTML = up.map(m => `
     <div class="mi" id="pm-${m.id}" onclick="selP('${m.id}')">
-      <div class="mi-row"><div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>${sbadge(m)}</div>
+      <div class="mi-row">
+        <div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+        ${sbadge(m)}
+      </div>
       <div class="mi-m">${m.stage} · ${ft(m.ko)}</div>
-    </div>`).join("")||'<div class="mt">All fixtures complete. No matches active for prediction.</div>';
+    </div>`).join("") || '<div class="mt">All fixtures processed. No matches open for prediction.</div>';
 }
 
 function renderGPList(){
