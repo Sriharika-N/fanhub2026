@@ -501,12 +501,12 @@ function connectAbly() {
 
 function initAbly(){
   try{
-    // Auto-connect to your Vercel auth endpoint safely
-    ablyRT = new Ably.Realtime({
-      authUrl: '/api/auth',
-      clientId: SID,
-      recover: true
-    });
+   // Point it directly to your Vercel server's auth route
+ablyRT = new Ably.Realtime({
+  authUrl: 'https://YOUR-VERCEL-APP-NAME.vercel.app/api/auth',
+  clientId: SID,
+  recover: true
+});
 
     ablyRT.connection.on("connected", async ()=>{
       setConn(true);
