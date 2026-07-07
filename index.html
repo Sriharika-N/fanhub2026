@@ -674,9 +674,9 @@ function renderPMList(){
         ${sbadge(m)}
       </div>
       <div class="mi-m">${m.stage} · ${ft(m.ko)}</div>
-    </div>`).join("") || '<div class="mt">All fixtures processed. No matches open for prediction.</div>';
+    </div>`).join("") || '<div class="mt">All fixtures processed. No matches active for prediction.</div>';
 }
-
+  
 function renderGPList(){
   const up = MS.filter(m => getTrueStatus(m) === "scheduled").slice(0,5);
   const p=LS.preds();
