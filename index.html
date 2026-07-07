@@ -516,8 +516,9 @@ function initAbly(){
     ablyRT.connection.on("connected", async ()=>{
       setConn(true);
 
-      chLive = ablyRT.channels.get("persisted:fh-live-v2", {params:{rewind:"100"}});
-      chRants = ablyRT.channels.get("persisted:fh-rants-v2", {params:{rewind:"100"}});
+// Add the 'persisted:' prefix to match the rule namespace
+chLive = ablyRT.channels.get("persisted:fh-live-v2", {params:{rewind:"100"}});
+chRants = ablyRT.channels.get("persisted:fh-rants-v2", {params:{rewind:"100"}});
 
       chLive.subscribe("r", msg=>{
         const r = msg.data;
