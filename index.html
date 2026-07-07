@@ -288,18 +288,8 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ ABLY BANNER ════════════════════════════════════════ -->
-<div id="ab-banner">
-  <strong>⚡ Enable real-time sync — rants visible to all fans instantly (free, 2 min)</strong>
-  <p>1. <a href="https://ably.com" target="_blank" style="color:var(--gold)">ably.com</a> → Sign up free (no card) → Create App → copy API Key<br>
-  2. Paste below → Connect → green dot appears → done!</p>
-  <div class="ab-row">
-    <input class="ab-i" id="ak-i" placeholder="Paste Ably API key (xVLRtg.abc123:xyz...)">
-    <button class="ab-btn" onclick="connectAbly()">Connect →</button>
-    <button class="ab-skip" onclick="skipAbly()">Skip</button>
-  </div>
-</div>
-
+<!-- ABLY BANNER (Hidden because we now use Vercel Auto-Auth!) -->
+<div id="ab-banner" style="display: none;"></div>
 <!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
