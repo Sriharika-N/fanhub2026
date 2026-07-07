@@ -42,7 +42,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 #profile-modal.show{display:flex}
 .pm-c{background:var(--card);border:1px solid var(--gb);border-radius:20px;padding:24px;max-width:360px;width:100%;text-align:center}
 .pm-h{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:16px}
-.pm-cur{font-size:36px;margin-bottom:8px}
+.pm-cur(font-size:36px;margin-bottom:8px}
 .pm-name{font-size:13px;color:var(--muted);margin-bottom:16px}
 
 /* ── HEADER ── */
@@ -215,7 +215,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
-<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -240,7 +239,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
@@ -266,7 +264,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="hdr-top">
     <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
@@ -282,7 +279,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div class="brand-sub">Built by Sriharika Nallagorla</div>
 </div>
 
-<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -295,7 +291,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
-<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -309,7 +304,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
-  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
     <span id="lr-sync-txt">Syncing with real-time global stadium feed...</span>
@@ -335,7 +329,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
-<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
@@ -373,7 +366,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
-<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -391,7 +383,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
-<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -400,7 +391,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:14px; scroll-margin-top: 100px;"><div class="card empty">Select an upcoming match above to type goals and submit</div></div>
 </div>
 
-<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -428,20 +418,17 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- Sleek Footer Credits -->
 <div style="text-align: center; font-size: 24px; color: var(--muted); padding: 24px 0 12px 0; border-top: 1px solid var(--b); margin-top: 20px; line-height: 1.3;">
   Built by <span style="color: var(--gold); font-weight: 500;">Sriharika Nallagorla</span>
 </div>
 
-</div><!-- /root -->
-
-<script>
+</div><script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
 let ME = JSON.parse(localStorage.getItem("fh_me")||"null");
 
-// 💥 PASTE YOUR RESTRUCTURING ABLY KEY DIRECTLY INSIDE THESE QUOTES:
+// 💥 SEARCH AND PASTE YOUR SAFE RESTRICTED KEY WITHIN THESE QUOTES:
 let AK = "PEa0HQ.KUlYQQ:FlbQkZXoSdwz1u9TAvo8zDwr9JHyFFteCY__HDrS7DI";
 
 let ablyRT = null;
@@ -465,7 +452,7 @@ const REACTS=["🔥","😂","💯","😭","👏","❤️","⚽","🤣"];
 const EI={goal:"⚽",yellow_card:"🟨",red_card:"🟥",penalty:"🎯",own_goal:"😬"};
 
 // ════════════════════════════════════════════════════════════
-// FIFA 2026 DATA
+// FIFA 2026 WORLD CUP MATCH STORE
 // ════════════════════════════════════════════════════════════
 const MS=[
 {id:"r32a",h:"Canada",a:"South Africa",hf:"🇨🇦",af:"🇿🇦",hs:1,as:0,stage:"Round of 32",v:"BC Place, Vancouver",ko:"2026-06-28T23:00:00Z",s:"finished",ev:[{m:92,t:"goal",si:"home",p:"Eustaquio — 92' winner!"}]},
@@ -576,7 +563,7 @@ function setConn(on){
   connected=on;
   const d=document.getElementById("cdot"),l=document.getElementById("clbl");
   if(d)d.className="cdot"+(on?" live":"");
-  if(l){l.textContent=on?"live":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
+  if(l){l.textContent=on?"live Ley":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
   updateSyncStatus();
 }
 
@@ -653,7 +640,7 @@ function renderNext24(){
     return diff > 0 && diff < 86400000;
   });
   const el=document.getElementById("next24");
-  if(!ms.length){el.innerHTML=`<div class="mt" style="margin-bottom:10px">No matches scheduled in the next 24 hours.</div>`;return;}
+  if(!ms.length){el.innerHTML=`<div class="mt" style="margin-bottom:10px">No matches scheduled inside the next 24 hours.</div>`;return;}
   el.innerHTML=ms.map(m=>{
     const diff=new Date(m.ko).getTime()-Date.now(),hot=diff<10800000;
     return`<div class="n24 ${hot?"hot":""}" onclick="selHero('${m.id}')">
@@ -668,9 +655,12 @@ function renderPMList(){
   const up = MS.filter(m => getTrueStatus(m) === "scheduled");
   document.getElementById("pm-list").innerHTML=up.map(m=>`
     <div class="mi" id="pm-${m.id}" onclick="selP('${m.id}')">
-      <div class="mi-row"><div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>${sbadge(m)}</div>
+      <div class="mi-row">
+        <div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+        ${sbadge(m)}
+      </div>
       <div class="mi-m">${m.stage} · ${ft(m.ko)}</div>
-    </div>`).join("")||'<div class="mt">All fixtures processed. No matches open for predictions.</div>';
+    </div>`).join("")||'<div class="mt">All fixtures complete. No matches active for prediction.</div>';
 }
 
 function renderGPList(){
@@ -688,7 +678,7 @@ function renderGPList(){
         <div class="pb-lbl" style="font-size:11px;margin-top:5px"><span>${m.h} <strong>${hp}%</strong></span><span>Draw <strong>${dp}%</strong></span><span>${m.a} <strong>${ap}%</strong></span></div>`
         :`<div style="font-size:11px;color:var(--muted)">No inputs captured yet.</div>`}
     </div>`;
-  }).join("")||'<div class="mt">No upcoming entries matching target.</div>';
+  }).join("")||'<div class="mt">No upcoming entries available.</div>';
 }
 
 function fillSelects(){
@@ -772,7 +762,7 @@ function sbadge(m){
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function avbg(av){return AVB[av]||"rgba(59,139,212,.2)";}
-const Bore = (m)=>{if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecstatic|Proud|fire/.test(m))return"el";if(/Heartbroken|Gutted/.test(m))return"sad";if(/Watching|LOL/.test(m))return"ch";return"";};
+const mCls = (m)=>{if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecstatic|Proud|fire/.test(m))return"el";if(/Heartbroken|Gutted/.test(m))return"sad";if(/Watching|LOL/.test(m))return"ch";return"";};
 
 function boot(){
   updateUINames();
@@ -823,7 +813,7 @@ function rCard(r){
     const cnt=(r.reactions||{})[e]||0,on=myR[rid]===e;
     return`<button class="rbtn ${on?"on":""}" onclick="rxRant(event,'${rid}','${e}',${on},'${r.id}')">${e}${cnt>0?`<span class="rct">${cnt}</span>`:""}</button>`;
   }).join("");
-  return`<div class="rc ${Bore(r.mood||"")}">
+  return`<div class="rc ${mCls(r.mood||"")}">
     <div class="rc-m">
       <div class="rav" style="background:${avbg(r.av)}">${r.av||"🦁"}</div>
       <div style="flex:1"><div class="rn">${esc(r.name)} <span style="font-size:12px">${r.mood||""}</span></div><div class="rt">${ago(r.ts)}</div></div>
@@ -929,7 +919,7 @@ function renderPB(m){
 }
 
 // ════════════════════════════════════════════════════════════
-// PREDICTIONS FORM INTERACTIVE ENGINE (SMOOTH SCROLL BUG FIXED)
+// PREDICTIONS FORM INTERACTIVE ENGINE
 // ════════════════════════════════════════════════════════════
 function selP(id){
   selPMid=id;selW=null;
@@ -967,7 +957,6 @@ function selP(id){
     </div>`;
   renderGPList();
   
-  // Dynamic Scroll Handler: Shifts hidden viewport to display layout modifications instantly
   setTimeout(() => {
     document.getElementById("p-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, 80);
