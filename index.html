@@ -19,7 +19,7 @@
   --r:10px;--rr:14px;
 }
 html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont("Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(34,197,94,.05),transparent 55%),radial-gradient(ellipse at 5% 95%,rgba(59,139,212,.04),transparent 45%);pointer-events:none;z-index:0}
 .root{position:relative;z-index:1;max-width:480px;margin:0 auto}
 
@@ -136,7 +136,7 @@ textarea.ti{width:100%;padding:11px 12px;font-size:14px;background:var(--bg2);bo
 textarea.ti:focus{outline:none;border-color:var(--gold)}
 .moods{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
 .mc{font-size:12px;padding:5px 10px;border-radius:20px;border:1px solid var(--b);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.mc.on{border-color:var(--gb);background:var(--gf);color:var(--gold)}
+.mc.on{border-color:var(--gold);background:var(--gf);color:var(--gold)}
 .post-btn{width:100%;padding:12px;font-size:14px;font-weight:700;background:var(--gold);color:#060d18;border:none;border-radius:var(--r);cursor:pointer;margin-top:8px}
 .post-btn:active{opacity:.88}
 
@@ -443,7 +443,7 @@ let moods = {l:"😡 Furious", r:"😡 Furious"};
 let rantFilter = "all";
 let matchFilter = "all"; 
 let selMid = null, selPMid = null, selW = null;
-let pmAv = "🦁"; 
+let pmAv = "🦁", obAv = "🦁"; 
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
