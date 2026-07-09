@@ -19,7 +19,7 @@
   --r:10px;--rr:14px;
 }
 html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont("Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(34,197,94,.05),transparent 55%),radial-gradient(ellipse at 5% 95%,rgba(59,139,212,.04),transparent 45%);pointer-events:none;z-index:0}
 .root{position:relative;z-index:1;max-width:480px;margin:0 auto}
 
@@ -215,6 +215,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
+<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -239,6 +240,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
@@ -264,6 +266,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="hdr-top">
     <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
@@ -279,6 +282,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div class="brand-sub">Built by Sriharika Nallagorla</div>
 </div>
 
+<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -291,6 +295,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
+<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -304,6 +309,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
+  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
     <span id="lr-sync-txt">Syncing with real-time global stadium feed...</span>
@@ -329,6 +335,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
+<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
@@ -366,6 +373,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
+<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -383,6 +391,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
+<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -391,6 +400,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:14px; scroll-margin-top: 100px;"><div class="card empty">Select an upcoming match above to type goals and submit</div></div>
 </div>
 
+<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -418,11 +428,14 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
+<!-- Sleek Footer Credits -->
 <div style="text-align: center; font-size: 24px; color: var(--muted); padding: 24px 0 12px 0; border-top: 1px solid var(--b); margin-top: 20px; line-height: 1.3;">
   Built by <span style="color: var(--gold); font-weight: 500;">Sriharika Nallagorla</span>
 </div>
 
-</div><script>
+</div><!-- /root -->
+
+<script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
@@ -443,7 +456,7 @@ let moods = {l:"😡 Furious", r:"😡 Furious"};
 let rantFilter = "all";
 let matchFilter = "all"; 
 let selMid = null, selPMid = null, selW = null;
-let pmAv = "🦁"; 
+let pmAv = "🦁", obAv = "🦁"; 
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
@@ -474,10 +487,10 @@ const MS=[
 {id:"r16a",h:"Morocco",a:"Canada",hf:"🇲🇦",af:"🇨🇦",hs:3,as:0,stage:"Round of 16",v:"BC Place, Vancouver",ko:"2026-07-04T17:00:00Z",s:"finished",ev:[{m:5,t:"goal",si:"home",p:"Ounahi"},{m:90,t:"goal",si:"home",p:"Rahimi — Morocco into QF! 🌍"}]},
 {id:"r16b",h:"France",a:"Paraguay",hf:"🇫🇷",af:"🇵🇾",hs:1,as:0,stage:"Round of 16",v:"Lincoln Financial, Philadelphia",ko:"2026-07-04T21:00:00Z",s:"finished",ev:[{m:34,t:"penalty",si:"home",p:"Mbappé (pen)"}]},
 {id:"r16c",h:"Brazil",a:"Norway",hf:"🇧🇷",af:"🇳🇴",hs:1,as:2,stage:"Round of 16",v:"MetLife Stadium, New Jersey",ko:"2026-07-05T20:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"away",p:"Haaland"},{m:61,t:"goal",si:"home",p:"Vinicius Jr."},{m:73,t:"goal",si:"away",p:"Haaland"}]},
-{id:"r16d",h:"Mexico",a:"England",hf:"🇲🇽",af:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",hs:2,as:3,stage:"Round of 16",v:"Estadio Azteca, Mexico City",ko:"2026-07-06T00:00:00Z",s:"finished",ev:[{m:22,t:"goal",si:"away",p:"Bellingham"},{m:60,t:"penalty",si:"away",p:"Kane (pen)"}]},
+{id:"r16d",h:"Mexico",a:"England",hf:"🇲🇽",af:"🏴󠁧󠁢󠁥󠁮弈",hs:2,as:3,stage:"Round of 16",v:"Estadio Azteca, Mexico City",ko:"2026-07-06T00:00:00Z",s:"finished",ev:[{m:22,t:"goal",si:"away",p:"Bellingham"},{m:60,t:"penalty",si:"away",p:"Kane (pen)"}]},
 {id:"r16e",h:"Spain",a:"Portugal",hf:"🇪🇸",af:"🇵🇹",hs:1,as:0,stage:"Round of 16",v:"AT&T Stadium, Dallas",ko:"2026-07-06T19:00:00Z",s:"finished",ev:[{m:91,t:"goal",si:"home",p:"Merino"}]},
 {id:"r16f",h:"USA",a:"Belgium",hf:"🇺🇸",af:"🇧🇪",hs:1,as:4,stage:"Round of 16",v:"Lumen Field, Seattle",ko:"2026-07-07T00:00:00Z",s:"finished",ev:[{m:9,t:"goal",si:"away",p:"De Ketelaere"},{m:90,t:"goal",si:"away",p:"Lukaku"}]},
-{id:"r16g",h:"Argentina",a:"Egypt",hf:"🇦🇷",af:"🇪🇬",hs:2,as:1,stage:"Round of 16",v:"Mercedes-Benz, Atlanta",ko:"2026-07-07T16:00:00Z",s:"finished",ev:[]},,v:"Mercedes-Benz, Atlanta",ko:"2026-07-07T16:00:00Z",s:"scheduled",ev:[]},
+{id:"r16g",h:"Argentina",a:"Egypt",hf:"🇦🇷",af:"🇪🇬",hs:null,as:null,stage:"Round of 16",v:"Mercedes-Benz, Atlanta",ko:"2026-07-07T16:00:00Z",s:"scheduled",ev:[]},
 {id:"r16h",h:"Switzerland",a:"Colombia",hf:"🇨🇭",af:"🇨🇴",hs:null,as:null,stage:"Round of 16",v:"BC Place, Vancouver",ko:"2026-07-07T20:00:00Z",s:"scheduled",ev:[]},
 {id:"qf1",h:"France",a:"Morocco",hf:"🇫🇷",af:"🇲🇦",hs:null,as:null,stage:"Quarter-final",v:"Gillette Stadium, Boston",ko:"2026-07-09T20:00:00Z",s:"scheduled",ev:[]},
 {id:"qf2",h:"Spain",a:"Belgium",hf:"🇪🇸",af:"🇧🇪",hs:null,as:null,stage:"Quarter-final",v:"SoFi Stadium, Los Angeles",ko:"2026-07-10T19:00:00Z",s:"scheduled",ev:[]},
@@ -563,7 +576,7 @@ function setConn(on){
   connected=on;
   const d=document.getElementById("cdot"),l=document.getElementById("clbl");
   if(d) d.className="cdot"+(on?" live":"");
-  if(l) {l.textContent=on?"live":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
+  if(l) {l.textContent=on?"live Ley":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
   updateSyncStatus();
 }
 
@@ -681,25 +694,6 @@ function renderGPList(){
   }).join("")||'<div class="mt">No upcoming entries available.</div>';
 }
 
-function fillSelects(){
-  const sorted=[
-    ...MS.filter(m=>getTrueStatus(m)==="live"),
-    ...MS.filter(m=>getTrueStatus(m)==="scheduled"&&n24(m.ko)),
-    ...MS.filter(m=>getTrueStatus(m)==="finished").reverse().slice(0,20)
-  ];
-  const opts=sorted.map(m=>`<option value="${m.id}">${m.hf} ${m.h} vs ${m.af} ${m.a} (${getTrueStatus(m)==="finished"?`FT ${m.hs}-${m.as}`:ft(m.ko)})</option>`).join("");
-  ["rc-sel","lc-sel"].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML=opts;});
-}
-
-function updateDrink(){
-  const next=MS.filter(m=>getTrueStatus(m)==="scheduled").sort((a,b)=>new Date(a.ko)-new Date(b.ko))[0];
-  if(!next)return;
-  const diff=new Date(next.ko).getTime()-Date.now();
-  const s=document.getElementById("dk-s"),t=document.getElementById("dk-t");
-  if(s)s.textContent=`${next.hf} ${next.h} vs ${next.af} ${next.a} — ${diff<0?"live now!":fcd(next.ko)+" to go"}`;
-  if(t)t.textContent=diff<3600000&&diff>0?"🚨 Kickoff close! Grab that drink!":"Grab a drink, it's matchday!";
-}
-
 // ════════════════════════════════════════════════════════════
 // PROFILE MODULES
 // ════════════════════════════════════════════════════════════
@@ -772,7 +766,6 @@ function boot(){
   renderMatchList();
   renderPMList();
   renderGPList();
-  fillSelects();
   renderLiveFeed();
   renderRants();
   renderLB();
@@ -995,7 +988,7 @@ function renderLB(){
       <span class="lb-rk">${["🥇","🥈","🥉"][i]||i+1}</span>
       <span class="lb-n">${esc(d.name)}${sid===ME.id?" (you)":""}</span>
       <span class="lb-p">${d.pts} pts</span>
-    </div>`).join(""):'<div class="mt">Complete predictions to unlock metrics.</div>';
+    </div>`).join("")||'<div class="mt">Complete predictions to unlock metrics.</div>';
   const me=lb[ME.id];
   if(me){document.getElementById("my-pts").textContent=me.pts;document.getElementById("my-res").textContent=me.res;document.getElementById("my-sc").textContent=me.sc;}
   const rank=sorted.findIndex(([sid])=>sid===ME.id);
@@ -1022,7 +1015,7 @@ function switchTab(btn){
 function switchTabById(id){const b=document.querySelector(`.tab[data-tab="${id}"]`);if(b)switchTab(b);}
 
 // ════════════════════════════════════════════════════════════
-// ESPN DYNAMIC REAL-TIME POLLER (SAFETY CHECK BALANCED)
+// ESPN DYNAMIC REAL-TIME POLLER
 // ════════════════════════════════════════════════════════════
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
 
@@ -1061,7 +1054,6 @@ async function fetchESPN(){
                (hn.split(" ")[0].length>2 && ln.includes(hn.split(" ")[0]));
       });
       
-      // CRUCIAL STABILITY BRIDGE: Stop loop from parsing if endpoint cycles past completed slots
       if(!local || local.s === "finished") return;
 
       const prevS = local.s, prevH = local.hs, prevA = local.as;
