@@ -19,7 +19,7 @@
   --r:10px;--rr:14px;
 }
 html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont("Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(34,197,94,.05),transparent 55%),radial-gradient(ellipse at 5% 95%,rgba(59,139,212,.04),transparent 45%);pointer-events:none;z-index:0}
 .root{position:relative;z-index:1;max-width:480px;margin:0 auto}
 
@@ -215,7 +215,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
-<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -240,7 +239,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
@@ -266,7 +264,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="hdr-top">
     <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
@@ -282,7 +279,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div class="brand-sub">Built by Sriharika Nallagorla</div>
 </div>
 
-<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -295,7 +291,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
-<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -309,7 +304,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
-  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
     <span id="lr-sync-txt">Syncing with real-time global stadium feed...</span>
@@ -335,7 +329,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
-<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
@@ -373,7 +366,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
-<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -391,7 +383,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
-<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -400,7 +391,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:14px; scroll-margin-top: 100px;"><div class="card empty">Select an upcoming match above to type goals and submit</div></div>
 </div>
 
-<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -428,14 +418,11 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- Sleek Footer Credits -->
 <div style="text-align: center; font-size: 24px; color: var(--muted); padding: 24px 0 12px 0; border-top: 1px solid var(--b); margin-top: 20px; line-height: 1.3;">
   Built by <span style="color: var(--gold); font-weight: 500;">Sriharika Nallagorla</span>
 </div>
 
-</div><!-- /root -->
-
-<script>
+</div><script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
@@ -456,7 +443,7 @@ let moods = {l:"😡 Furious", r:"😡 Furious"};
 let rantFilter = "all";
 let matchFilter = "all"; 
 let selMid = null, selPMid = null, selW = null;
-let pmAv = "🦁", obAv = "🦁"; 
+let pmAv = "🦁"; 
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
@@ -647,15 +634,13 @@ function renderLive(){
   renderNext24();updateDrink();
 }
 
-// Fixed smooth rendering metrics array
 function renderNext24(){
   const ms = MS.filter(m => {
     const diff = new Date(m.ko).getTime() - Date.now();
     return diff > 0 && diff < 86400000;
   });
   const el=document.getElementById("next24");
-  if(!el) return;
-  if(!ms.length){el.innerHTML=`<div class="mt" style="margin-bottom:10px">No matches scheduled inside the next 24 hours.</div>`;return;}
+  if(!ms.length){el.innerHTML=`<div class="mt" style="margin-bottom:10px">No matches scheduled in the next 24 hours.</div>`;return;}
   el.innerHTML=ms.map(m=>{
     const diff=new Date(m.ko).getTime()-Date.now(),hot=diff<10800000;
     return`<div class="n24 ${hot?"hot":""}" onclick="selHero('${m.id}')">
@@ -787,6 +772,7 @@ function boot(){
   renderMatchList();
   renderPMList();
   renderGPList();
+  fillSelects();
   renderLiveFeed();
   renderRants();
   renderLB();
@@ -898,30 +884,23 @@ function renderHero(m){
   const evHtml=ev.map(e=>`<div class="hev"><span class="hev-m">${e.m}'</span><span class="hev-i">${EI[e.t]||"•"}</span><span class="hev-t">${esc(e.p)}</span></div>`).join("");
   const calculatedStatus = getTrueStatus(m);
   
-  const targetElement = document.getElementById("live-hero");
-  if(targetElement) {
-    targetElement.innerHTML=`
-      <div class="hero">
-        <div class="h-stage">${m.stage} · ${m.v.split(",")[0]}</div>
-        <div class="h-row">
-          <div class="h-team"><span class="hfl">${m.hf}</span><div class="hn">${m.h}</div></div>
-          <div class="h-mid">
-            <div class="hsc">${m.hs??'—'}<span>–</span>${m.as??'—'}</div>
-            ${calculatedStatus==="live"?`<div class="hlive"><div class="pulse"></div>LIVE</div>`:""}
-            <div class="hm">${calculatedStatus==="finished"?"Full time":calculatedStatus==="live"?"In progress":"Kickoff"}</div>
-            <div class="hd">${ft(m.ko)}</div>
-          </div>
-          <div class="h-team"><span class="hfl">${m.af}</span><div class="hn">${m.a}</div></div>
+  document.getElementById("live-hero").innerHTML=`
+    <div class="hero">
+      <div class="h-stage">${m.stage} · ${m.v.split(",")[0]}</div>
+      <div class="h-row">
+        <div class="h-team"><span class="hfl">${m.hf}</span><div class="hn">${m.h}</div></div>
+        <div class="h-mid">
+          <div class="hsc">${m.hs??'—'}<span>–</span>${m.as??'—'}</div>
+          ${calculatedStatus==="live"?`<div class="hlive"><div class="pulse"></div>LIVE</div>`:""}
+          <div class="hm">${calculatedStatus==="finished"?"Full time":calculatedStatus==="live"?"In progress":"Kickoff"}</div>
+          <div class="hd">${ft(m.ko)}</div>
         </div>
-        ${evHtml?`<div class="hevs">${evHtml}</div>`:""}
-      </div>`;
-  }
-  
-  const lcMatchLbl = document.getElementById("lc-match-lbl");
-  if(lcMatchLbl) lcMatchLbl.textContent=`Reacting to: ${m.hf} ${m.h} vs ${m.af} ${m.a}`;
-  
-  const lrl = document.getElementById("lrl");
-  if(lrl) lrl.textContent=`Live reactions — ${m.hf} ${m.h} vs ${m.af} ${m.a} 💬`;
+        <div class="h-team"><span class="hfl">${m.af}</span><div class="hn">${m.a}</div></div>
+      </div>
+      ${evHtml?`<div class="hevs">${evHtml}</div>`:""}
+    </div>`;
+  document.getElementById("lc-match-lbl").textContent=`Reacting to: ${m.hf} ${m.h} vs ${m.af} ${m.a}`;
+  document.getElementById("lrl").textContent=`Live reactions — ${m.hf} ${m.h} vs ${m.af} ${m.a} 💬`;
 }
 
 function renderPB(m){
@@ -930,18 +909,13 @@ function renderPB(m){
   const v={home:0,draw:0,away:0};all.forEach(x=>{if(x.winner in v)v[x.winner]++;});
   const tot=all.length||1;
   const hp=Math.round(v.home/tot*100),dp=Math.round(v.draw/tot*100),ap=Math.round(v.away/tot*100);
-  const wrapper = document.getElementById("pred-wrap");
-  if(!wrapper) return;
-  if(!all.length){wrapper.style.display="none";return;}
-  wrapper.style.display="block";
-  const board = document.getElementById("pred-board");
-  if(board) {
-    board.innerHTML=`
-      <div class="pb-hdr">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
-      <div class="pb-bar"><div class="pb-h" style="flex:${hp}"></div><div class="pb-d" style="flex:${dp}"></div><div class="pb-a" style="flex:${ap}"></div></div>
-      <div class="pb-lbl"><span>${m.h} <span class="pb-pct">${hp}%</span></span><span>Draw <span class="pb-pct">${dp}%</span></span><span>${m.a} <span class="pb-pct">${ap}%</span></span></div>
-      <div class="pb-n">${all.length} fan${all.length!==1?"s":""} predicted · ${getTrueStatus(m)==="finished"?"Match over":"Live"}</div>`;
-  }
+  if(!all.length){document.getElementById("pred-wrap").style.display="none";return;}
+  document.getElementById("pred-wrap").style.display="block";
+  document.getElementById("pred-board").innerHTML=`
+    <div class="pb-hdr">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+    <div class="pb-bar"><div class="pb-h" style="flex:${hp}"></div><div class="pb-d" style="flex:${dp}"></div><div class="pb-a" style="flex:${ap}"></div></div>
+    <div class="pb-lbl"><span>${m.h} <span class="pb-pct">${hp}%</span></span><span>Draw <span class="pb-pct">${dp}%</span></span><span>${m.a} <span class="pb-pct">${ap}%</span></span></div>
+    <div class="pb-n">${all.length} fan${all.length!==1?"s":""} predicted · ${getTrueStatus(m)==="finished"?"Match over":"Live"}</div>`;
 }
 
 // ════════════════════════════════════════════════════════════
@@ -994,7 +968,6 @@ function pickW(w){
   const b=document.getElementById("sub-btn");if(b){b.disabled=false;b.textContent="Submit prediction ✊";}
 }
 
-// Submits the local state predictions structure safely
 function subPred(mid){
   if(!selW)return;
   const b=document.getElementById("sub-btn");b.disabled=true;b.textContent="✅ Saved!";
@@ -1017,23 +990,16 @@ function renderLB(){
   });
   LS.sp(p);LS.slb(lb);
   const sorted=Object.entries(lb).sort((a,b)=>b[1].pts-a[1].pts);
-  const container = document.getElementById("lb");
-  if(container) {
-    container.innerHTML=sorted.length?sorted.slice(0,20).map(([sid,d],i)=>`
-      <div class="lb-r ${sid===ME.id?"lb-you":""}">
-        <span class="lb-rk">${["🥇","🥈","🥉"][i]||i+1}</span>
-        <span class="lb-n">${esc(d.name)}${sid===ME.id?" (you)":""}</span>
-        <span class="lb-p">${d.pts} pts</span>
-      </div>`).join(""):'<div class="mt">Complete predictions to unlock metrics.</div>';
-  }
+  document.getElementById("lb").innerHTML=sorted.length?sorted.slice(0,20).map(([sid,d],i)=>`
+    <div class="lb-r ${sid===ME.id?"lb-you":""}">
+      <span class="lb-rk">${["🥇","🥈","🥉"][i]||i+1}</span>
+      <span class="lb-n">${esc(d.name)}${sid===ME.id?" (you)":""}</span>
+      <span class="lb-p">${d.pts} pts</span>
+    </div>`).join(""):'<div class="mt">Complete predictions to unlock metrics.</div>';
   const me=lb[ME.id];
-  if(me){
-    const pts=document.getElementById("my-pts"),res=document.getElementById("my-res"),sc=document.getElementById("my-sc");
-    if(pts) pts.textContent=me.pts; if(res) res.textContent=me.res; if(sc) sc.textContent=me.sc;
-  }
+  if(me){document.getElementById("my-pts").textContent=me.pts;document.getElementById("my-res").textContent=me.res;document.getElementById("my-sc").textContent=me.sc;}
   const rank=sorted.findIndex(([sid])=>sid===ME.id);
-  const rnkEl = document.getElementById("my-rank");
-  if(rnkEl) rnkEl.textContent=rank>=0?"#"+(rank+1):"#—";
+  document.getElementById("my-rank").textContent=rank>=0?"#"+(rank+1):"#—";
 }
 
 function updateTZ(){
@@ -1056,7 +1022,7 @@ function switchTab(btn){
 function switchTabById(id){const b=document.querySelector(`.tab[data-tab="${id}"]`);if(b)switchTab(b);}
 
 // ════════════════════════════════════════════════════════════
-// ESPN DYNAMIC REAL-TIME POLLER
+// ESPN DYNAMIC REAL-TIME POLLER (SAFETY CHECK BALANCED)
 // ════════════════════════════════════════════════════════════
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
 
@@ -1095,6 +1061,7 @@ async function fetchESPN(){
                (hn.split(" ")[0].length>2 && ln.includes(hn.split(" ")[0]));
       });
       
+      // CRUCIAL STABILITY BRIDGE: Stop loop from parsing if endpoint cycles past completed slots
       if(!local || local.s === "finished") return;
 
       const prevS = local.s, prevH = local.hs, prevA = local.as;
