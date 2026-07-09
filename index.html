@@ -19,7 +19,7 @@
   --r:10px;--rr:14px;
 }
 html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont("Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(34,197,94,.05),transparent 55%),radial-gradient(ellipse at 5% 95%,rgba(59,139,212,.04),transparent 45%);pointer-events:none;z-index:0}
 .root{position:relative;z-index:1;max-width:480px;margin:0 auto}
 
@@ -136,7 +136,7 @@ textarea.ti{width:100%;padding:11px 12px;font-size:14px;background:var(--bg2);bo
 textarea.ti:focus{outline:none;border-color:var(--gold)}
 .moods{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
 .mc{font-size:12px;padding:5px 10px;border-radius:20px;border:1px solid var(--b);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.mc.on{border-color:var(--gb);background:var(--gf);color:var(--gold)}
+.mc.on{border-color:var(--gold);background:var(--gf);color:var(--gold)}
 .post-btn{width:100%;padding:12px;font-size:14px;font-weight:700;background:var(--gold);color:#060d18;border:none;border-radius:var(--r);cursor:pointer;margin-top:8px}
 .post-btn:active{opacity:.88}
 
@@ -215,7 +215,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 </head>
 <body>
 
-<!-- ════ ONBOARD ══════════════════════════════════════════ -->
 <div id="ob">
   <div class="ob-c">
     <div class="ob-ic">🏟️</div>
@@ -240,7 +239,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ PROFILE MODAL ════════════════════════════════════ -->
 <div id="profile-modal">
   <div class="pm-c">
     <div class="pm-h">Change your profile</div>
@@ -266,7 +264,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- ════ HEADER ════════════════════════════════════════════ -->
 <div class="hdr">
   <div class="hdr-top">
     <div class="logo"><span class="logo-i">🏟️</span><span class="logo-t">Fan Hub <em>2026</em></span></div>
@@ -282,7 +279,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div class="brand-sub">Built by Sriharika Nallagorla</div>
 </div>
 
-<!-- ════ TABS ════════════════════════════════════════════════ -->
 <div class="tabs-bar">
   <div class="tabs">
     <button class="tab on" data-tab="live" onclick="switchTab(this)">🔴 Live</button>
@@ -295,7 +291,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <div class="root">
 
-<!-- ════ LIVE ════════════════════════════════════════════════ -->
 <div id="tab-live" class="panel on">
   <div class="drink"><em>🍺</em>
     <div class="dt"><strong id="dk-t">Grab a drink, it's matchday!</strong><span id="dk-s">Loading next match...</span></div>
@@ -309,7 +304,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
   <div class="lbl" id="lrl">Live reactions 💬</div>
 
-  <!-- sync status -->
   <div class="sync-bar">
     <div class="sync-dot" id="lr-sync-dot"></div>
     <span id="lr-sync-txt">Syncing with real-time global stadium feed...</span>
@@ -335,7 +329,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="live-feed"></div>
 </div>
 
-<!-- ════ RANTS ════════════════════════════════════════════════ -->
 <div id="tab-rants" class="panel">
   <div class="sync-bar">
     <div class="sync-dot" id="r-sync-dot"></div>
@@ -373,7 +366,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="rant-feed"><div class="empty">No rants yet — post first! 🔥</div></div>
 </div>
 
-<!-- ════ MATCHES ════════════════════════════════════════════ -->
 <div id="tab-matches" class="panel">
   <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-radius:8px;margin-bottom:10px">
     ⏰ All times in <strong style="color:var(--gold)" id="tz-lbl">your timezone</strong> · Tap any match for details
@@ -391,7 +383,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="m-list"></div>
 </div>
 
-<!-- ════ PREDICT ════════════════════════════════════════════ -->
 <div id="tab-predict" class="panel">
   <div class="lbl">Community predictions — live</div>
   <div id="gp-list" class="gap"></div>
@@ -400,7 +391,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <div id="p-form" style="margin-top:14px; scroll-margin-top: 100px;"><div class="card empty">Select an upcoming match above to type goals and submit</div></div>
 </div>
 
-<!-- ════ BOARD ════════════════════════════════════════════ -->
 <div id="tab-board" class="panel">
   <div class="g2 gap">
     <div style="background:var(--card);border-radius:var(--r);padding:14px;text-align:center"><div style="font-size:28px;font-weight:700;color:var(--gold)" id="my-pts">0</div><div style="font-size:12px;color:var(--muted)">Your points</div></div>
@@ -428,20 +418,17 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   </div>
 </div>
 
-<!-- Sleek Footer Credits -->
 <div style="text-align: center; font-size: 24px; color: var(--muted); padding: 24px 0 12px 0; border-top: 1px solid var(--b); margin-top: 20px; line-height: 1.3;">
   Built by <span style="color: var(--gold); font-weight: 500;">Sriharika Nallagorla</span>
 </div>
 
-</div><!-- /root -->
-
-<script>
+</div><script>
 // ════════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════════
 let ME = JSON.parse(localStorage.getItem("fh_me")||"null");
 
-// 💥 PASTE YOUR RESTRUCTURING ABLY KEY DIRECTLY INSIDE THESE QUOTES:
+// 💥 SAFE ACTIVE CONNECTION PASSWAY STRINGS LOADED
 let AK = "PEa0HQ.KUlYQQ:FlbQkZXoSdwz1u9TAvo8zDwr9JHyFFteCY__HDrS7DI";
 
 let ablyRT = null;
@@ -456,7 +443,7 @@ let moods = {l:"😡 Furious", r:"😡 Furious"};
 let rantFilter = "all";
 let matchFilter = "all"; 
 let selMid = null, selPMid = null, selW = null;
-let pmAv = "🦁"; 
+let pmAv = "🦁", obAv = "🦁"; 
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const SID = (()=>{let s=localStorage.getItem("fh_sid");if(!s){s="u"+Math.random().toString(36).slice(2,9);localStorage.setItem("fh_sid",s);}return s;})();
@@ -465,7 +452,7 @@ const REACTS=["🔥","😂","💯","😭","👏","❤️","⚽","🤣"];
 const EI={goal:"⚽",yellow_card:"🟨",red_card:"🟥",penalty:"🎯",own_goal:"😬"};
 
 // ════════════════════════════════════════════════════════════
-// FIFA 2026 DATA
+// FIFA 2026 WORLD CUP MATCH STORE
 // ════════════════════════════════════════════════════════════
 const MS=[
 {id:"r32a",h:"Canada",a:"South Africa",hf:"🇨🇦",af:"🇿🇦",hs:1,as:0,stage:"Round of 32",v:"BC Place, Vancouver",ko:"2026-06-28T23:00:00Z",s:"finished",ev:[{m:92,t:"goal",si:"home",p:"Eustaquio — 92' winner!"}]},
@@ -486,20 +473,16 @@ const MS=[
 {id:"r32p",h:"Colombia",a:"Ghana",hf:"🇨🇴",af:"🇬🇭",hs:1,as:0,stage:"Round of 32",v:"Arrowhead, Kansas City",ko:"2026-07-04T01:30:00Z",s:"finished",ev:[{m:14,t:"goal",si:"home",p:"Jhon Arias"}]},
 {id:"r16a",h:"Morocco",a:"Canada",hf:"🇲🇦",af:"🇨🇦",hs:3,as:0,stage:"Round of 16",v:"BC Place, Vancouver",ko:"2026-07-04T17:00:00Z",s:"finished",ev:[{m:5,t:"goal",si:"home",p:"Ounahi"},{m:90,t:"goal",si:"home",p:"Rahimi — Morocco into QF! 🌍"}]},
 {id:"r16b",h:"France",a:"Paraguay",hf:"🇫🇷",af:"🇵🇾",hs:1,as:0,stage:"Round of 16",v:"Lincoln Financial, Philadelphia",ko:"2026-07-04T21:00:00Z",s:"finished",ev:[{m:34,t:"penalty",si:"home",p:"Mbappé (pen)"}]},
-{id:"r16c",h:"Brazil",a:"Norway",hf:"🇧🇷",af:"🇳🇴",hs:1,as:2,stage:"Round of 16",v:"MetLife Stadium, New Jersey",ko:"2026-07-05T20:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"away",p:"Haaland"},{m:61,t:"goal",si:"home",p:"Vinicius Jr."},{m:73,t:"goal",si:"away",p:"Haaland"}]},
+{id:"r16c",h:"Brazil",a:"Norway",hf:"🇧🇷",af:"🇳永",hs:1,as:2,stage:"Round of 16",v:"MetLife Stadium, New Jersey",ko:"2026-07-05T20:00:00Z",s:"finished",ev:[{m:14,t:"goal",si:"away",p:"Haaland"},{m:61,t:"goal",si:"home",p:"Vinicius Jr."},{m:73,t:"goal",si:"away",p:"Haaland"}]},
 {id:"r16d",h:"Mexico",a:"England",hf:"🇲🇽",af:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",hs:2,as:3,stage:"Round of 16",v:"Estadio Azteca, Mexico City",ko:"2026-07-06T00:00:00Z",s:"finished",ev:[{m:22,t:"goal",si:"away",p:"Bellingham"},{m:60,t:"penalty",si:"away",p:"Kane (pen)"}]},
 {id:"r16e",h:"Spain",a:"Portugal",hf:"🇪🇸",af:"🇵🇹",hs:1,as:0,stage:"Round of 16",v:"AT&T Stadium, Dallas",ko:"2026-07-06T19:00:00Z",s:"finished",ev:[{m:91,t:"goal",si:"home",p:"Merino"}]},
 {id:"r16f",h:"USA",a:"Belgium",hf:"🇺🇸",af:"🇧🇪",hs:1,as:4,stage:"Round of 16",v:"Lumen Field, Seattle",ko:"2026-07-07T00:00:00Z",s:"finished",ev:[{m:9,t:"goal",si:"away",p:"De Ketelaere"},{m:90,t:"goal",si:"away",p:"Lukaku"}]},
-{id:"r16g",h:"Argentina",a:"Egypt",hf:"🇦🇷",af:"🇪🇬",hs:null,as:null,stage:"Round of 16",v:"Mercedes-Benz, Atlanta",ko:"2026-07-07T16:00:00Z",s:"scheduled",ev:[]},
-{id:"r16h",h:"Switzerland",a:"Colombia",hf:"🇨🇭",af:"🇨🇴",hs:null,as:null,stage:"Round of 16",v:"BC Place, Vancouver",ko:"2026-07-07T20:00:00Z",s:"scheduled",ev:[]},
+{id:"r16g",h:"Argentina",a:"Egypt",hf:"🇦🇷",af:"🇪🇬",hs:3,as:2,stage:"Round of 16",v:"Mercedes-Benz, Atlanta",ko:"2026-07-07T16:00:00Z",s:"finished",ev:[{m:44,t:"goal",si:"home",p:"Messi"},{m:81,t:"goal",si:"home",p:"Martinez"}]},
+{id:"r16h",h:"Switzerland",a:"Colombia",hf:"🇨🇭",af:"🇨🇴",hs:0,as:0,stage:"Round of 16",v:"BC Place, Vancouver",ko:"2026-07-07T20:00:00Z",s:"finished",ev:[{m:120,t:"penalty",si:"home",p:"Switzerland won 4-3 on penalties ⚡"}]},
 {id:"qf1",h:"France",a:"Morocco",hf:"🇫🇷",af:"🇲🇦",hs:null,as:null,stage:"Quarter-final",v:"Gillette Stadium, Boston",ko:"2026-07-09T20:00:00Z",s:"scheduled",ev:[]},
 {id:"qf2",h:"Spain",a:"Belgium",hf:"🇪🇸",af:"🇧🇪",hs:null,as:null,stage:"Quarter-final",v:"SoFi Stadium, Los Angeles",ko:"2026-07-10T19:00:00Z",s:"scheduled",ev:[]},
 {id:"qf3",h:"Norway",a:"England",hf:"🇳🇴",af:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",hs:null,as:null,stage:"Quarter-final",v:"Hard Rock Stadium, Miami",ko:"2026-07-11T21:00:00Z",s:"scheduled",ev:[]},
-{id:"qf4",h:"Arg/Egypt winner",a:"Swi/Col winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Quarter-final",v:"Arrowhead, Kansas City",ko:"2026-07-12T01:00:00Z",s:"scheduled",ev:[]},
-{id:"sf1",h:"QF1 winner",a:"QF2 winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Semi-final",v:"AT&T Stadium, Dallas",ko:"2026-07-14T19:00:00Z",s:"scheduled",ev:[]},
-{id:"sf2",h:"QF3 winner",a:"QF4 winner",hf:"🏳",af:"🏳",hs:null,as:null,stage:"Semi-final",v:"Mercedes-Benz, Atlanta",ko:"2026-07-15T19:00:00Z",s:"scheduled",ev:[]},
-{id:"p3",h:"SF loser 1",a:"SF loser 2",hf:"🏳",af:"🏳",hs:null,as:null,stage:"3rd Place",v:"Hard Rock, Miami",ko:"2026-07-18T21:00:00Z",s:"scheduled",ev:[]},
-{id:"fin",h:"SF winner 1",a:"SF winner 2",hf:"🏳",af:"🏳",hs:null,as:null,stage:"🏆 Final",v:"MetLife Stadium, New York",ko:"2026-07-19T19:00:00Z",s:"scheduled",ev:[]}
+{id:"qf4",h:"Argentina",a:"Switzerland",hf:"🇦🇷",af:"🇨🇭",hs:null,as:null,stage:"Quarter-final",v:"Arrowhead, Kansas City",ko:"2026-07-12T01:00:00Z",s:"scheduled",ev:[]}
 ];
 
 // ════════════════════════════════════════════════════════════
@@ -515,7 +498,7 @@ const LS={
 };
 
 // ════════════════════════════════════════════════════════════
-// HOOK ENGINE
+// CONNECTIONS ENGINE
 // ════════════════════════════════════════════════════════════
 function initAbly(){
   if(AK.includes("PASTE")) return;
@@ -546,7 +529,7 @@ function initAbly(){
         hist.forEach(r=>{if(!liveRants.find(x=>x.id===r.id)) liveRants.push(r);});
         liveRants.sort((a,b)=>b.ts-a.ts);
         renderLiveFeed();
-      }catch(e){console.warn("History registry loop down.");}
+      }catch(e){console.warn("Live channels history track block skipped.");}
 
       chRants.subscribe("r", msg=>{
         const r = msg.data;
@@ -562,7 +545,7 @@ function initAbly(){
         hist.forEach(r=>{if(!rants.find(x=>x.id===r.id)) rants.push(r);});
         rants.sort((a,b)=>b.ts-a.ts);
         renderRants();
-      }catch(e){console.warn("Global timeline rollback down.");}
+      }catch(e){console.warn("Global timeline sync block skipped.");}
 
       updateSyncStatus();
     });
@@ -575,8 +558,8 @@ function initAbly(){
 function setConn(on){
   connected=on;
   const d=document.getElementById("cdot"),l=document.getElementById("clbl");
-  if(d)d.className="cdot"+(on?" live":"");
-  if(l){l.textContent=on?"live":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
+  if(d) d.className="cdot"+(on?" live":"");
+  if(l) {l.textContent=on?"live":"offline";l.style.color=on?"var(--ok)":"var(--muted)";}
   updateSyncStatus();
 }
 
@@ -631,7 +614,7 @@ function renderMatchList(f){
         <div style="text-align:right"><span class="mi-s">${m.s==="scheduled"?"vs":`${m.hs??"0"} – ${m.as??"0"}`}</span>${sbadge(m)}</div>
       </div>
       <div class="mi-m">${m.stage} · ${ft(m.ko)}<br>${m.v}</div>
-    </div>`).join("")||'<div class="mt">No matched fixture configurations available.</div>';
+    </div>`).join("")||'<div class="mt">No matched entries found.</div>';
 }
 
 function filterM(f,btn){
@@ -668,9 +651,12 @@ function renderPMList(){
   const up = MS.filter(m => getTrueStatus(m) === "scheduled");
   document.getElementById("pm-list").innerHTML=up.map(m=>`
     <div class="mi" id="pm-${m.id}" onclick="selP('${m.id}')">
-      <div class="mi-row"><div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>${sbadge(m)}</div>
+      <div class="mi-row">
+        <div class="mi-t">${m.hf} ${m.h} vs ${m.af} ${m.a}</div>
+        ${sbadge(m)}
+      </div>
       <div class="mi-m">${m.stage} · ${ft(m.ko)}</div>
-    </div>`).join("")||'<div class="mt">All fixtures processed. No matches open for predictions.</div>';
+    </div>`).join("")||'<div class="mt">All tournament matches processed.</div>';
 }
 
 function renderGPList(){
@@ -686,9 +672,9 @@ function renderGPList(){
       <div style="font-size:11px;color:var(--muted);margin-bottom:7px">${ft(m.ko)}</div>
       ${all.length?`<div class="pb-bar"><div class="pb-h" style="flex:${hp}"></div><div class="pb-d" style="flex:${dp}"></div><div class="pb-a" style="flex:${ap}"></div></div>
         <div class="pb-lbl" style="font-size:11px;margin-top:5px"><span>${m.h} <strong>${hp}%</strong></span><span>Draw <strong>${dp}%</strong></span><span>${m.a} <strong>${ap}%</strong></span></div>`
-        :`<div style="font-size:11px;color:var(--muted)">No inputs captured yet.</div>`}
+        :`<div style="font-size:11px;color:var(--muted)">No predictions found.</div>`}
     </div>`;
-  }).join("")||'<div class="mt">No upcoming entries matching target.</div>';
+  }).join("")||'<div class="mt">No upcoming entries available.</div>';
 }
 
 function fillSelects(){
@@ -706,8 +692,8 @@ function updateDrink(){
   if(!next)return;
   const diff=new Date(next.ko).getTime()-Date.now();
   const s=document.getElementById("dk-s"),t=document.getElementById("dk-t");
-  if(s)s.textContent=`${next.hf} ${next.h} vs ${next.af} ${next.a} — ${diff<0?"live now!":fcd(next.ko)+" to go"}`;
-  if(t)t.textContent=diff<3600000&&diff>0?"🚨 Kickoff close! Grab that drink!":"Grab a drink, it's matchday!";
+  if(s) s.textContent=`${next.hf} ${next.h} vs ${next.af} ${next.a} — ${diff<0?"live now!":fcd(next.ko)+" to go"}`;
+  if(t) t.textContent=diff<3600000&&diff>0?"🚨 Kickoff close! Grab that drink!":"Grab a drink, it's matchday!";
 }
 
 // ════════════════════════════════════════════════════════════
@@ -772,7 +758,7 @@ function sbadge(m){
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function avbg(av){return AVB[av]||"rgba(59,139,212,.2)";}
-const Bore = (m)=>{if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecstatic|Proud|fire/.test(m))return"el";if(/Heartbroken|Gutted/.test(m))return"sad";if(/Watching|LOL/.test(m))return"ch";return"";};
+const mCls = (m)=>{if(!m)return"";if(/Furious|Robbed/.test(m))return"hot";if(/Ecstatic|Proud|fire/.test(m))return"el";if(/Heartbroken|Gutted/.test(m))return"sad";if(/Watching|LOL/.test(m))return"ch";return"";};
 
 function boot(){
   updateUINames();
@@ -816,6 +802,7 @@ function renderLiveFeed(){
   el.innerHTML=liveRants.slice(0,30).map(r=>rCard(r)).join("");
 }
 
+// Renders the individual stream panels
 function rCard(r){
   const myR=LS.rx();
   const rid="r_"+r.id;
@@ -823,7 +810,7 @@ function rCard(r){
     const cnt=(r.reactions||{})[e]||0,on=myR[rid]===e;
     return`<button class="rbtn ${on?"on":""}" onclick="rxRant(event,'${rid}','${e}',${on},'${r.id}')">${e}${cnt>0?`<span class="rct">${cnt}</span>`:""}</button>`;
   }).join("");
-  return`<div class="rc ${Bore(r.mood||"")}">
+  return`<div class="rc ${mCls(r.mood||"")}">
     <div class="rc-m">
       <div class="rav" style="background:${avbg(r.av)}">${r.av||"🦁"}</div>
       <div style="flex:1"><div class="rn">${esc(r.name)} <span style="font-size:12px">${r.mood||""}</span></div><div class="rt">${ago(r.ts)}</div></div>
@@ -929,7 +916,7 @@ function renderPB(m){
 }
 
 // ════════════════════════════════════════════════════════════
-// PREDICTIONS FORM INTERACTIVE ENGINE (SMOOTH SCROLL BUG FIXED)
+// PREDICTIONS ENGINE
 // ════════════════════════════════════════════════════════════
 function selP(id){
   selPMid=id;selW=null;
@@ -967,7 +954,6 @@ function selP(id){
     </div>`;
   renderGPList();
   
-  // Dynamic Scroll Handler: Shifts hidden viewport to display layout modifications instantly
   setTimeout(() => {
     document.getElementById("p-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, 80);
@@ -1033,13 +1019,13 @@ function switchTab(btn){
 function switchTabById(id){const b=document.querySelector(`.tab[data-tab="${id}"]`);if(b)switchTab(b);}
 
 // ════════════════════════════════════════════════════════════
-// ESPN DYNAMIC POLLER
+// ESPN DYNAMIC REAL-TIME RANGE POLLER
 // ════════════════════════════════════════════════════════════
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260719";
 
 async function fetchESPN(){
   try{
-    const res = await fetch(ESPN_URL+"?limit=50&"+Date.now(), {
+    const res = await fetch(ESPN_URL+"&limit=50&"+Date.now(), {
       headers:{"Accept":"application/json"},
       cache:"no-store"
     });
@@ -1071,6 +1057,7 @@ async function fetchESPN(){
         return (ln.split(" ")[0].length>2 && hn.includes(ln.split(" ")[0])) ||
                (hn.split(" ")[0].length>2 && ln.includes(hn.split(" ")[0]));
       });
+      
       if(!local) return;
 
       const prevS = local.s, prevH = local.hs, prevA = local.as;
